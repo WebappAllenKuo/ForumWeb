@@ -1,0 +1,65 @@
+﻿
+@model ForumWebsite.Models.user_Tb
+@{
+    ViewBag.Title = "會員中心";
+}
+
+<div class="indica page update_user">
+    <div class="container">
+        <div class="col-md-9 posta">
+            <h3>
+                <strong>會員資料更新</strong>
+                <label1></label1>
+            </h3>
+            <div class="pageContent">
+                <div><strong>@(Session["name"])</strong> 您好!</div>
+                <div>@(Html.ActionLink("修改會員資料", "UpdateUserInfo", "User", new { user = Session["account"]}, new { @class = "btn btn-info" }))</div>
+                <div></div>
+            </div>
+        </div>
+
+
+            <div class="col-md-3  redes">
+                <h3>
+                    最新 <strong>文章回覆</strong>
+                    <label3></label3>
+                </h3>
+                <div class="dicado-top">
+                    <h5>30 app para download</h5>
+                </div>
+                <div class="dicado-bottom">
+                    <div class="dicado-1">
+                        <h6><a href="#">Xbox Series X 主機將如期在年底上市 但部分遊戲可能延期</a></h6>
+                        <span class="itac">
+                            最新回覆 : Paulo Ricardo<br /><i class="far fa-clock"></i> 3 天前<i class="dot_"></i><i class="far fa-comment"></i> 32
+                        </span>
+                    </div>
+                    <div class="dicado-1">
+                        <h6><a href="#">Xbox Series X 主機將如期在年底上市 但部分遊戲可能延期</a></h6>
+                        <span class="itac">
+                            最新回覆 : Paulo Ricardo<br /><i class="far fa-clock"></i> 3 天前<i class="dot_"></i><i class="far fa-comment"></i> 32
+                        </span>
+                    </div>
+                    <div class="dicado-1">
+                        <h6><a href="#">Xbox Series X 主機將如期在年底上市 但部分遊戲可能延期</a></h6>
+                        <span class="itac">
+                            最新回覆 : Paulo Ricardo<br /><i class="far fa-clock"></i> 3 天前<i class="dot_"></i><i class="far fa-comment"></i> 32
+                        </span>
+                    </div>
+                    <div class="dicado-1">
+                        <h6><a href="#">Xbox Series X 主機將如期在年底上市 但部分遊戲可能延期</a></h6>
+                        <span class="itac">
+                            最新回覆 : Paulo Ricardo<br /><i class="far fa-clock"></i> 3 天前<i class="dot_"></i><i class="far fa-comment"></i> 32
+                        </span>
+                    </div>
+                    <div class="dicado-1">
+                        <h6><a href="#">Xbox Series X 主機將如期在年底上市 但部分遊戲可能延期</a></h6>
+                        <span class="itac">
+                            最新回覆 : Paulo Ricardo<br /><i class="far fa-clock"></i> 3 天前<i class="dot_"></i><i class="far fa-comment"></i> 32
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+</div>

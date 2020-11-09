@@ -1,0 +1,119 @@
+﻿@model ForumWebsite.Models.user_Tb
+@{
+    ViewBag.Title = "更新會員資訊";
+    string birthday = "";
+    if (Model.birthday != null)
+    {
+        DateTime date = DateTime.Parse(Model.birthday.ToString());
+        birthday = date.ToString("yyyy/MM/dd");
+    }
+    bool gender = true, man = true, woman = false;
+    if (Model.gender != null)
+    {
+        gender = (bool)Model.gender;
+        man = gender ? true : false;
+        woman = !gender ? true : false;
+    }
+}
+
+<div class="indica page registration update_user">
+    <div class="container">
+        <div class="col-md-9 posta">
+            <h3>
+                <strong>會員資料更新</strong>
+                <label1></label1>
+            </h3>
+            @using (Html.BeginForm("UpdateUserInfoCheck", "User", FormMethod.Post, new { @class = "form-horizontal regis_form" }))
+            {
+                @Html.AntiForgeryToken()
+                <div class="control-group">
+                    @Html.LabelFor(m => m.account, new { @class = "control-label" })
+                    @Html.DisplayFor(m => m.account)
+                    @Html.HiddenFor(m => m.account)
+                </div>
+                <div class="control-group">
+                    @Html.LabelFor(m => m.password, new { @class = "control-label" })
+                    @Html.TextBoxFor(m => m.password, new { type = "password", @class = "control", placeholder = "請設定6-15位英數字混合密碼，英文需區分大小寫" })
+                    @Html.ValidationMessageFor(m => m.password)
+                </div>
+                <div class="control-group">
+                    @Html.LabelFor(m => m.username, new { @class = "control-label" })
+                    @Html.TextBoxFor(m => m.username, new { @class = "control", placeholder = "請輸入您的名稱" })
+                    @Html.ValidationMessageFor(m => m.username)
+                </div>
+                <div class="control-group">
+                    @Html.LabelFor(m => m.gender, new { @class = "control-label" })
+                    @Html.RadioButton("gender", "true", man, new { style = "width:0px" }) 男性
+                    @Html.RadioButton("gender", "false", woman, new { style = "width:0px" }) 女性
+                    @Html.ValidationMessageFor(m => m.gender)
+                </div>
+                <div class="control-group">
+                    @Html.LabelFor(m => m.birthday, new { @class = "control-label" })
+                    @Html.TextBoxFor(m => m.birthday, birthday, new { @class = "control", placeholder = "2020/1/1" })
+                    @Html.ValidationMessageFor(m => m.birthday)
+                </div>
+                <div class="control-group">
+                    @Html.LabelFor(m => m.email, new { @class = "control-label" })
+                    @Html.TextBoxFor(m => m.email, new { @class = "control", placeholder = "abc@abc.com.tw" })
+                    @Html.ValidationMessageFor(m => m.email)
+                </div>
+                <div class="control-group">
+                    <button class="btn btn-warning" type="submit">確定送出</button>
+                    <button class="btn btn-default cancel_btn" type="reset" onclick="">取消更新</button>
+                    @Html.Hidden("userId", Model.user_id)
+                </div>
+                <script>
+                    $(function () {
+                        $(".cancel_btn").click(function () {
+                            if (confirm("確定取消嗎?")) {
+                                location.href = "/User/UserInfoCenter";
+                            }
+                        });
+                    });
+                </script>
+            }
+        </div>
+        <div class="col-md-3  redes">
+            <h3>
+                最新 <strong>文章回覆</strong>
+                <label3></label3>
+            </h3>
+            <div class="dicado-top">
+                <h5>30 app para download</h5>
+            </div>
+            <div class="dicado-bottom">
+                <div class="dicado-1">
+                    <h6><a href="#">Xbox Series X 主機將如期在年底上市 但部分遊戲可能延期</a></h6>
+                    <span class="itac">
+                        最新回覆 : Paulo Ricardo<br /><i class="far fa-clock"></i> 3 天前<i class="dot_"></i><i class="far fa-comment"></i> 32
+                    </span>
+                </div>
+                <div class="dicado-1">
+                    <h6><a href="#">Xbox Series X 主機將如期在年底上市 但部分遊戲可能延期</a></h6>
+                    <span class="itac">
+                        最新回覆 : Paulo Ricardo<br /><i class="far fa-clock"></i> 3 天前<i class="dot_"></i><i class="far fa-comment"></i> 32
+                    </span>
+                </div>
+                <div class="dicado-1">
+                    <h6><a href="#">Xbox Series X 主機將如期在年底上市 但部分遊戲可能延期</a></h6>
+                    <span class="itac">
+                        最新回覆 : Paulo Ricardo<br /><i class="far fa-clock"></i> 3 天前<i class="dot_"></i><i class="far fa-comment"></i> 32
+                    </span>
+                </div>
+                <div class="dicado-1">
+                    <h6><a href="#">Xbox Series X 主機將如期在年底上市 但部分遊戲可能延期</a></h6>
+                    <span class="itac">
+                        最新回覆 : Paulo Ricardo<br /><i class="far fa-clock"></i> 3 天前<i class="dot_"></i><i class="far fa-comment"></i> 32
+                    </span>
+                </div>
+                <div class="dicado-1">
+                    <h6><a href="#">Xbox Series X 主機將如期在年底上市 但部分遊戲可能延期</a></h6>
+                    <span class="itac">
+                        最新回覆 : Paulo Ricardo<br /><i class="far fa-clock"></i> 3 天前<i class="dot_"></i><i class="far fa-comment"></i> 32
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"> </div>
+    </div>
+</div>

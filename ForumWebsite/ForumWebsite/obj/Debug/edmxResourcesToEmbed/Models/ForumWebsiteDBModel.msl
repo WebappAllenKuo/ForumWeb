@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ForumWebsiteDBModelStoreContainer" CdmEntityContainer="ForumWebsiteDBEntities">
+    <EntitySetMapping Name="article_reply_Tb">
+      <EntityTypeMapping TypeName="ForumWebsiteDBModel.article_reply_Tb">
+        <MappingFragment StoreEntitySet="article_reply_Tb">
+          <ScalarProperty Name="reply_id" ColumnName="reply_id" />
+          <ScalarProperty Name="reply_txt" ColumnName="reply_txt" />
+          <ScalarProperty Name="reply_date" ColumnName="reply_date" />
+          <ScalarProperty Name="reply_update" ColumnName="reply_update" />
+          <ScalarProperty Name="arti_id" ColumnName="arti_id" />
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="article_Tb">
+      <EntityTypeMapping TypeName="ForumWebsiteDBModel.article_Tb">
+        <MappingFragment StoreEntitySet="article_Tb">
+          <ScalarProperty Name="arti_id" ColumnName="arti_id" />
+          <ScalarProperty Name="title" ColumnName="title" />
+          <ScalarProperty Name="arti_date" ColumnName="arti_date" />
+          <ScalarProperty Name="arti_update" ColumnName="arti_update" />
+          <ScalarProperty Name="arti_txt" ColumnName="arti_txt" />
+          <ScalarProperty Name="view_num" ColumnName="view_num" />
+          <ScalarProperty Name="arti_top" ColumnName="arti_top" />
+          <ScalarProperty Name="arti_theme" ColumnName="arti_theme" />
+          <ScalarProperty Name="board_id" ColumnName="board_id" />
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="board_Tb">
+      <EntityTypeMapping TypeName="ForumWebsiteDBModel.board_Tb">
+        <MappingFragment StoreEntitySet="board_Tb">
+          <ScalarProperty Name="board_ID" ColumnName="board_ID" />
+          <ScalarProperty Name="board_name" ColumnName="board_name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="user_Tb">
+      <EntityTypeMapping TypeName="ForumWebsiteDBModel.user_Tb">
+        <MappingFragment StoreEntitySet="user_Tb">
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="account" ColumnName="account" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="gender" ColumnName="gender" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="birthday" ColumnName="birthday" />
+          <ScalarProperty Name="account_right" ColumnName="account_right" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

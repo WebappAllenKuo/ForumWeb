@@ -1,0 +1,42 @@
+﻿@using System.Web.Optimization
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@Page.Title</title>
+    <link href='http:///fonts.useso.com/css?family=Roboto:400,300,100,500,700,900' rel='stylesheet' type='text/css'>
+    <link href='http:///fonts.useso.com/css?family=Roboto+Condensed:400,300,700' rel='stylesheet' type='text/css'>
+    @Styles.Render("~/All/Css")
+    @Styles.Render("~/bundles/jquery")
+    @RenderSection("head", required: false)
+    @Scripts.Render("~/bundles/jquery")
+    <script>
+        // You can also use "$(window).load(function() {"
+        $(function () {
+            //討論區按鈕
+            $(".gossip_sort").before('<div class="gossip_cover gossip_close">');
+            $(".gossip_close").click(function () {
+                var $this = $(this);
+                $(".gossip_sort").toggleClass("active");
+                $("body").toggleClass("active");
+                $(".gossip_cover").toggleClass("active");
+            });
+            //登入按鈕
+            $(".sign_btn").click(function () {
+                var $this = $(this);
+                var login_box = $(".login_box");
+                login_box.toggleClass("active");
+            });
+        });
+    </script>
+    @RenderSection("Scripts", required:false)
+</head>
+<body>
+    @{
+        Html.RenderAction("_Header", "Home");
+    }
+    <div class="containerbox">
+        @RenderBody()
+    </div>
+    @Html.Partial("_footer")
+</body>
+</html>

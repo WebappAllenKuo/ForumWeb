@@ -1,0 +1,42 @@
+﻿
+@{
+    ViewBag.Title = "ResultMessage";
+    string runUrl = ViewBag.Url;
+    string Msg = ViewData["Message"].ToString();
+}
+
+<div class="indica page registration">
+    <div class="container">
+        <div class="col-md-9 posta">
+            <h3>
+                <strong>訊息結果</strong>
+                <label1></label1>
+            </h3>
+            <div class="pageContent">
+                <span class="resultMsg">
+                    @Html.Raw(Msg)<br />
+                </span><br />
+                @*如有上個頁面網址則給予連結*@
+                <p><font id="time_second">3</font>秒後自動跳轉</p>
+                <a href="@runUrl" class="btn btn-danger">如無法跳轉請按此跳轉頁面</a>
+                <script>
+                            onload=function(){
+                                setInterval(go, 1000);
+                            };
+                            var x=3; //利用了全域性變數來執行
+                            function go(){
+                                x--;
+                                if(x>0){
+                                    document.getElementById("time_second").innerHTML=x; //每次設定的x的值都不一樣了。
+                                }else{
+                                    location.href="@(runUrl)";
+                                }
+                            }
+                </script>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+    </div>
+</div>
+
+

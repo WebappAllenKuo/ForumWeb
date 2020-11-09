@@ -1,0 +1,46 @@
+﻿@model ForumWebsite.Models.user_Tb
+@{
+    string runUrl = ViewBag.Url;
+}
+@{
+    ViewBag.Title = "ResultAddUser";
+}
+<div class="indica page registration">
+    <div class="container">
+        <div class="col-md-9 posta">
+            <h3>
+                <strong>會員註冊</strong>
+                <label1></label1>
+            </h3>
+            <div class="pageContent">
+                <h2>訊息結果:</h2>
+                <span class="resultMsg">
+                    @Html.Raw(ViewData["Message"])
+                </span><br />
+                <p><font id="time_second">3</font>秒後自動跳轉</p>
+                @*如創檢會員失敗給予連結*@
+                @if ((bool)ViewData["NoSuccess"])
+                {
+                    @Html.ActionLink("重新註冊會員", "UserRegistration", "User", null, new { @class = "btn btn-danger" })
+                }
+                <script>
+                            onload=function(){
+                                setInterval(go, 1000);
+                            };
+                            var x=3; //利用了全域性變數來執行
+                            function go(){
+                                x--;
+                                if(x>0){
+                                    document.getElementById("time_second").innerHTML=x; //每次設定的x的值都不一樣了。
+                                }else{
+                                    location.href="@(runUrl)";
+                                }
+                            }
+                </script>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+    </div>
+</div>
+
+

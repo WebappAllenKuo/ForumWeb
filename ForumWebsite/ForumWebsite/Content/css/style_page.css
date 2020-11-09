@@ -1,0 +1,332 @@
+.indica h3 {
+}
+.posta-1 {
+  padding-bottom: 1em;
+  margin-bottom: 1em;
+  border-bottom: 1px solid #ddd;
+}
+
+.posta-right h4 {
+  font-size: 1.2em;
+}
+.posta-top {
+  margin-top: 2em;
+}
+.posta-top p {
+  font-size: 0.8em;
+}
+.posta {
+  padding-left: 0;
+}
+.posta font.article_t {
+  display: block;
+  margin-bottom: 1em;
+}
+.article_search {
+  position: relative;
+  margin-bottom: 30px;
+}
+.article_search input {
+  background: #f2f2f2;
+  width: 60%;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #ccc;
+  padding: 0.8em;
+  border-radius: 5px;
+  margin-right: 0.5em;
+}
+.article_search button {
+  background-color: transparent;
+  border: 0;
+  border-style: solid;
+  border-color: #ccc;
+  padding: 0.9em 1.3em 0.9em 0.9em;
+  border-radius: 5px;
+  position: absolute;
+  top: 0;
+  left: 55%;
+}
+.article_search select {
+  border: 1px solid #ccc;
+  padding: 0.6em;
+}
+.board_sort {
+  margin-bottom: 1em;
+}
+.board_sort ul {
+}
+.board_sort ul li {
+  display: inline-block;
+}
+.board_sort ul li a {
+  color: #333;
+  font-size: 0.9em;
+  display: inline-block;
+  padding: 0.5em 1em;
+  border-radius: 3px;
+  border: 1px solid #ccc;
+  transition-duration: 0.3s;
+}
+.board_sort ul li a:hover {
+  color: #fff;
+  background: rgb(255, 115, 0);
+  border-color: rgb(255, 115, 0);
+}
+
+/*--page_index_button--*/
+.p_index {
+    text-align: center;
+    margin-top: 30px;
+}
+.p_index span, .p_index li  {
+    display: inline-block;
+}
+.p_index ul, .p_index li {
+    display: inline-block;
+}
+.p_index a {
+    color:#333;
+    background:#ddd;
+    display: inline-block;
+    padding: .5em .8em;
+    border-radius: 3px;
+}
+.p_index a:hover {
+    color:#333;
+    background:#aaa;
+}
+/*--page_index_button end--*/
+/*--registration--*/
+.registration .regis_form {
+  margin-top: 40px;
+}
+.registration .regis_form label {
+  display: inline-block;
+  margin-right: 1em;
+}
+.registration .regis_form input {
+  font-size: .9em;
+  display: inline-block;
+  width: 60%;
+  padding: .8em;
+  border:1px solid #bbb;
+  border-radius:3px;
+}
+.registration .regis_form input[type=checkbox] {
+  display: inline-block;
+  width: auto;
+  padding: 0;
+  margin-right: .5em;
+  border:1px solid #ccc;
+  border-radius:3px;
+}
+.registration .regis_form .control-group {
+  margin-bottom: 1.5em;
+}
+.registration .regis_form .contract {
+  vertical-align: middle;
+font-size: .9em;
+}
+.registration .regis_form button{
+  font-family: 'Helvetica Neue',Helvetica,Arial,STHeiti,'Microsoft JhengHei','微軟正黑體',sans-serif;
+  padding: .5em 1.5em;
+}
+.registration .regis_form button[type=submit]{
+  margin-right: 1em;
+}
+.registration .regis_form button[type=reset]{
+  background: #eee;
+}
+.registration .regis_form button[type=reset]:hover{
+  background: #ddd;
+}
+/*--registration end--*/
+
+/*--article_in--*/
+.article_in .article_storey {
+  border-bottom: 3px solid rgb(28, 143, 66);
+  padding-bottom: 50px;
+  margin-bottom: 30px;
+}
+.article_in .article_storey:last-child {
+  border: 0;
+  padding-bottom: 30px;
+  margin-bottom:0;
+}
+.article_in .author_box {
+  width: 20%;
+  float: left;
+  margin-right: 3%;
+}
+.article_in .article_box
+{
+  width: 77%;
+  float: left;
+}
+.article_in .author_box .head_img {
+}
+.article_in .author_box .head_img img {
+  text-align: center;
+  max-width: 100%;
+  display: inline-block;
+  margin-bottom: 20px;
+  border-radius: 15px;
+}
+.article_in .author_box span {
+  color: #666;
+  font-size: .9em;
+  display: block;
+}
+.article_in .author_box span font {
+  display: inline-block;
+  margin-left: .5em;
+}
+.article_in .author_box a.author {
+  color: rgb(36, 86, 160);
+  font-size: 1em;
+  display: block;
+  padding: 0 0 .5em;
+  margin-bottom: .5em;
+  border-bottom: 1px solid #ddd;
+  transition: .5s;
+}
+.article_in .author_box a.author:hover {
+  color: rgb(26, 151, 223);
+}
+.article_in .author_box span.auth_num {
+  color:#bbb;
+  font-size: .8em;
+}
+.article_in .info_box {
+  padding-bottom: 1em;
+  margin-bottom: 1.5em;
+  border-bottom: 1px solid #ddd;
+}
+.article_in .info_box strong {
+  font-size: 1.6em;
+  display: block;
+  margin-bottom: .3em;
+}
+.article_in .info_box span {
+  font-size: 1em;
+  font-weight: normal;
+}
+.article_in .info_box span.author {
+  margin-right: 12px;
+}
+.article_in .info_box span.art_s {
+  
+}
+.article_in .info_box span.art_s a {
+  font-size: .8em;
+  font-style: 1em;
+  margin-right: .5em;
+}
+.article_in .info_box span.art_num {
+  color: #aaa;
+  font-size: .9em;
+}
+.article_in .info_box span a.author {
+  color: rgb(0, 185, 108);
+}
+.article_in .info_box span.art_s a.sort {
+  color:rgb(243, 109, 0);
+}
+.article_in .info_box font {
+  display: inline-block;
+  margin-right: 15px;
+}
+.article_in .article_box .article_txt {
+  line-height: 1.8;
+  margin-bottom: 30px;
+}
+.article_in .article_box .article_txt p {
+  margin-bottom: 1em;
+}
+.article_in .article_box .other_fun {
+  text-align: right;
+}
+.article_in .article_box .other_fun > a {
+  color: #fff;
+  background-color: rgb(230, 164, 42);
+  display: inline-block;
+  padding: .5em 1em;
+  margin-left: .5em;
+  border-radius: 3px;
+}
+.article_in .article_box .other_fun > a:hover {
+  background-color: rgb(230, 133, 42);
+}
+.article_in .article_box .other_fun span.edit_but {
+  color: #fff;
+  background-color: rgb(212, 212, 212);
+  display: inline-block;
+  padding: .5em 1em;
+  margin-left: .5em;
+  border-radius: 3px;
+  transition: .5s;
+  cursor: pointer;
+}
+.article_in .article_box .other_fun span.edit_but:hover {  
+  background-color: rgb(133, 133, 133);
+}
+.article_in .article_box .other_fun span.edit_but {
+  position: relative;
+}
+.article_in .article_box .other_fun span.edit_but .edit_sele {
+  background-color: transparent;
+  display: none;
+  width: 80px;
+  margin: 0 auto;
+  position: absolute;
+  top:42px;
+  left: 0;
+  right: 0;
+  border-radius: 5px;
+  box-shadow: 0 5px 20px rgba(0,0,0,.30);
+}
+.article_in .article_box .other_fun span.edit_but:hover .edit_sele {
+  display: block;
+}
+.article_in .article_box .other_fun span.edit_but .edit_sele:before {
+  content: "";  
+  width: 8px;
+  margin: 0 auto;
+  border-width:0 8px 8px ;
+  border-style:solid;
+  border-color:transparent transparent #fff;
+  position: absolute;
+  top: -8px;
+  left: 0;
+  right: 0;
+}
+.article_in .article_box .other_fun span.edit_but .edit_sele:after {
+  content: "";  
+  width: 100%;
+  height: 10px;
+  margin: 0 auto;
+  position: absolute;
+  top: -8px;
+  left: 0;
+  right: 0;
+}
+.article_in .article_box .other_fun span.edit_but a {
+  font-size: .9em;
+  text-align: center;
+  background: #fff;
+  display: block;
+  padding: .5em;
+  border-bottom: 1px solid #ddd;
+  border-radius: 20px;
+}
+.article_in .article_box .other_fun span.edit_but a:hover {
+}
+.article_in .article_box .other_fun span.edit_but a:first-child {
+  border-radius: 5px 5px 0 0;
+}
+.article_in .article_box .other_fun span.edit_but a:last-child {
+  border-radius: 0 0 5px 5px;
+  border-bottom: 0;
+}
+/*--article_in end--*/

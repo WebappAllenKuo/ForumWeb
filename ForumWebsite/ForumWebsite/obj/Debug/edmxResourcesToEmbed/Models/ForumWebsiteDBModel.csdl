@@ -1,0 +1,127 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ForumWebsiteDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="article_reply_Tb">
+    <Key>
+      <PropertyRef Name="reply_id" />
+    </Key>
+    <Property Name="reply_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="reply_txt" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="reply_date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="reply_update" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="arti_id" Type="Int32" Nullable="false" />
+    <Property Name="user_id" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="article_Tb" Relationship="Self.FK_article_reply_article" FromRole="article_reply_Tb" ToRole="article_Tb" />
+    <NavigationProperty Name="user_Tb" Relationship="Self.FK_article_reply_user" FromRole="article_reply_Tb" ToRole="user_Tb" />
+  </EntityType>
+  <EntityType Name="article_Tb">
+    <Key>
+      <PropertyRef Name="arti_id" />
+    </Key>
+    <Property Name="arti_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="title" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="arti_date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="arti_update" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="arti_txt" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="view_num" Type="Int64" />
+    <Property Name="arti_top" Type="Boolean" />
+    <Property Name="arti_theme" Type="Int32" />
+    <Property Name="board_id" Type="Int32" Nullable="false" />
+    <Property Name="user_id" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="article_reply_Tb" Relationship="Self.FK_article_reply_article" FromRole="article_Tb" ToRole="article_reply_Tb" />
+    <NavigationProperty Name="board_Tb" Relationship="Self.FK_article_board" FromRole="article_Tb" ToRole="board_Tb" />
+    <NavigationProperty Name="user_Tb" Relationship="Self.FK_article_user" FromRole="article_Tb" ToRole="user_Tb" />
+  </EntityType>
+  <EntityType Name="board_Tb">
+    <Key>
+      <PropertyRef Name="board_ID" />
+    </Key>
+    <Property Name="board_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="board_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="article_Tb" Relationship="Self.FK_article_board" FromRole="board_Tb" ToRole="article_Tb" />
+  </EntityType>
+  <EntityType Name="user_Tb">
+    <Key>
+      <PropertyRef Name="user_id" />
+    </Key>
+    <Property Name="user_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="account" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="password" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="gender" Type="Boolean" />
+    <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="birthday" Type="DateTime" Precision="0" />
+    <Property Name="account_right" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="article_reply_Tb" Relationship="Self.FK_article_reply_user" FromRole="user_Tb" ToRole="article_reply_Tb" />
+    <NavigationProperty Name="article_Tb" Relationship="Self.FK_article_user" FromRole="user_Tb" ToRole="article_Tb" />
+  </EntityType>
+  <Association Name="FK_article_reply_article">
+    <End Role="article_Tb" Type="Self.article_Tb" Multiplicity="1" />
+    <End Role="article_reply_Tb" Type="Self.article_reply_Tb" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="article_Tb">
+        <PropertyRef Name="arti_id" />
+      </Principal>
+      <Dependent Role="article_reply_Tb">
+        <PropertyRef Name="arti_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_article_reply_user">
+    <End Role="user_Tb" Type="Self.user_Tb" Multiplicity="1" />
+    <End Role="article_reply_Tb" Type="Self.article_reply_Tb" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="user_Tb">
+        <PropertyRef Name="user_id" />
+      </Principal>
+      <Dependent Role="article_reply_Tb">
+        <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_article_board">
+    <End Role="board_Tb" Type="Self.board_Tb" Multiplicity="1" />
+    <End Role="article_Tb" Type="Self.article_Tb" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="board_Tb">
+        <PropertyRef Name="board_ID" />
+      </Principal>
+      <Dependent Role="article_Tb">
+        <PropertyRef Name="board_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_article_user">
+    <End Role="user_Tb" Type="Self.user_Tb" Multiplicity="1" />
+    <End Role="article_Tb" Type="Self.article_Tb" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="user_Tb">
+        <PropertyRef Name="user_id" />
+      </Principal>
+      <Dependent Role="article_Tb">
+        <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ForumWebsiteDBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="article_reply_Tb" EntityType="Self.article_reply_Tb" />
+    <EntitySet Name="article_Tb" EntityType="Self.article_Tb" />
+    <EntitySet Name="board_Tb" EntityType="Self.board_Tb" />
+    <EntitySet Name="user_Tb" EntityType="Self.user_Tb" />
+    <AssociationSet Name="FK_article_reply_article" Association="Self.FK_article_reply_article">
+      <End Role="article_Tb" EntitySet="article_Tb" />
+      <End Role="article_reply_Tb" EntitySet="article_reply_Tb" />
+    </AssociationSet>
+    <AssociationSet Name="FK_article_reply_user" Association="Self.FK_article_reply_user">
+      <End Role="user_Tb" EntitySet="user_Tb" />
+      <End Role="article_reply_Tb" EntitySet="article_reply_Tb" />
+    </AssociationSet>
+    <AssociationSet Name="FK_article_board" Association="Self.FK_article_board">
+      <End Role="board_Tb" EntitySet="board_Tb" />
+      <End Role="article_Tb" EntitySet="article_Tb" />
+    </AssociationSet>
+    <AssociationSet Name="FK_article_user" Association="Self.FK_article_user">
+      <End Role="user_Tb" EntitySet="user_Tb" />
+      <End Role="article_Tb" EntitySet="article_Tb" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

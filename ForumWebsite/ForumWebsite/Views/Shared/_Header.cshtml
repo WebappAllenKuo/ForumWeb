@@ -1,0 +1,60 @@
+﻿@model ForumWebsite.Models.HomeViewModel
+@{ 
+    bool onLogin = (bool)ViewData["onLogin"];
+    Session["driectUrl"] = Request.Url.LocalPath;
+}
+<div class="gossip_sort">
+    <span><i class="far fa-comments"></i>交流討論平台</span>
+    <ul>
+        @foreach (var item in Model.boardList)
+    {
+            <li><a href="@item.board_ID" title="@item.board_name">@item.board_name</a></li>
+        }
+    </ul>
+</div>
+<div class="header">
+    <div class="container">
+        <div class="header-left">
+            <div class="logo">
+                <a href="/Home/Index"><h1 title="線上交流平台×討論版">線上交流平台<span>×</span>討論版</h1></a>
+
+            </div>
+            <div class="gossip_sort_button gossip_close">
+                <span><i class="fas fa-align-left"></i> 討論版</span>
+            </div>
+        </div><div class="header-right">
+                  <div class="login">
+                      @if (onLogin)
+    {
+                          @:您好 @ViewData["username"] <a class="sign_btn" href="/User/OutLogin">登出 </a><a href="/User/UserInfoCenter"><i class="fas fa-user-circle"></i>會員中心</a>
+                      }
+                      else
+                      {
+                          <a class="sign_btn" href="javascript:void(0)"><i class="fas fa-user-circle"></i>登入</a><a href="~/User/UserRegistration"><i class="fas fa-user-plus"></i>註冊</a>
+
+                          <div class="login_box">
+                              <form name="loginForm" action="~/User/UserLogin" method="post">
+                                  <span class="login_title">使用者登入</span>
+                                  <div><label for="userName">帳號</label><input name="userName" value=""></div>
+                                  <div><label for="password">密碼</label><input name="password" value=""></div>
+                                  @Html.AntiForgeryToken()
+                                  <div class="sign_btn"><a class="for_pw" href="#">忘記密碼</a><button type="submit">登入</button></div>
+                              </form>
+                          </div>
+                      }
+                  </div>
+
+            <div class="search-box">
+                <div id="sb-search" class="sb-search">
+                    <form>
+                        <input class="sb-search-input" placeholder="Enter your search term..." type="search"
+                               name="search" id="search">
+                        <button class="sb-search-submit" type="submit" value="">
+                            <i class="fa fa-search" aria-hidden="true"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
