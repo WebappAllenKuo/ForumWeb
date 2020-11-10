@@ -5,8 +5,9 @@ using System.Web;
 using System.Web.Mvc;
 using ForumWebsite.Models;
 using ForumWebsite.Models.Other;
-using ForumWebsite.Models.Interface.Repository;
+using ForumWebsite.Models.Interface.Service;
 using ForumWebsite.Models.Repository;
+using ForumWebsite.Models.Service;
 using ForumWebsite.Filters;
 
 namespace ForumWebsite.Controllers
@@ -14,19 +15,20 @@ namespace ForumWebsite.Controllers
     [UserLoginCheck]
     public class UserController : Controller
     {
-        protected IRepository_Users Repository_User_P { get; private set; }
+        private Method_Cs Method = new Method_Cs();
+        protected IService_User Server_User_P { get; private set; }
         public UserController() : this(null) { }
-        public UserController(IRepository_Users Repository_Users_Val)
+        public UserController(IService_User Service_Users_Val)
         {
-            Repository_User_P = Repository_Users_Val ?? new Repository_Users();
+            Server_User_P = Service_Users_Val ?? new Service_User();
         }
         // GET: User
         #region 註冊會員
         public ActionResult UserRegistration()
         {
-            if (getSessionAccount_Val != "") {
+            if (Method.getSessionAccount_Val != "") {
                 TempData[InternalVal._RESULTMSG] = "您已是會員!";
-                //new Method_Cs().RedirectUrl = "";
+                //Method.RedirectUrl = "";
                 return RedirectToAction("ResultMessage", "Home");
             }
             return View();
@@ -43,7 +45,7 @@ namespace ForumWebsite.Controllers
                 columnIsError = true;
             }
             //帳號是否重複註冊
-            var accountExist = Repository_User_P.GetUserInfo_Md(form.account.Trim());
+            var accountExist = Server_User_P.GetUserInfo_Md(form.account.Trim());
             if (accountExist != null)
             {
                 ViewBag.accountError = "該帳號已被註冊";
@@ -85,10 +87,10 @@ namespace ForumWebsite.Controllers
             user_Tb objItem = (user_Tb)TempData["objUserInfo"];
             //防止重整頁面重複提交
             if (objItem == null) return Redirect("/");
-            var accountExist = Repository_User_P.GetUserInfo_Md(objItem.account);
+            var accountExist = Server_User_P.GetUserInfo_Md(objItem.account);
             if (accountExist == null)
             {
-                bool Result = Repository_User_P.InsertUser_Md(objItem);
+                bool Result = Server_User_P.InsertUser_Md(objItem);
                 ViewData["Message"] = (Result) ? "加入會員成功!" : "加入會員失敗，請重新加入!!";
                 ViewData["NoSuccess"] = false;
                 ViewData["Message"] += "<br />" + ((Result) ? objItem.username + " 恭喜您成功加入會員!!" : "");
@@ -104,12 +106,12 @@ namespace ForumWebsite.Controllers
         public ActionResult UpdateUserInfo(string user)
         {
             //檢查是否已登入會員
-            if (user != getSessionAccount_Val)
+            if (user != Method.getSessionAccount_Val)
             {
                 TempData[InternalVal._RESULTMSG] = "請先登入會員!";
                 return RedirectToAction("ResultMessage", "Home");
             }
-            user_Tb objItem = Repository_User_P.GetUserInfo_Md(user);
+            user_Tb objItem = Server_User_P.GetUserInfo_Md(user);
             return View(objItem);
         }
         [HttpPost]
@@ -121,22 +123,22 @@ namespace ForumWebsite.Controllers
                 return View("UpdateUserInfo", objItem);
             }
             //檢查是否已登入會員
-            if (string.IsNullOrEmpty(getSessionAccount_Val))
+            if (string.IsNullOrEmpty(Method.getSessionAccount_Val))
             {
                 TempData[InternalVal._RESULTMSG] = "請先登入會員!";
                 return RedirectToAction("ResultMessage", "Home");
             }
             //給予帳號與ID
-            objItem.account = getSessionAccount_Val;
+            objItem.account = Method.getSessionAccount_Val;
             objItem.user_id = int.Parse(Request.Form["userId"]);
-            bool result = Repository_User_P.UpdateUser_Md(objItem);
+            bool result = Server_User_P.UpdateUser_Md(objItem);
             string msg = "會員資料更新成功!<br />請重新登入會員!";
             if (!result) { msg = "會員資料更新失敗!"; }
             TempData[InternalVal._RESULTMSG] = msg;
             //設定返回位置
-            //new Method_Cs().RedirectUrl = "/User/UserInfoCenter";
+            //Method.RedirectUrl = "/User/UserInfoCenter";
             //清除登入資訊
-            ClearUserInfo();
+            Method.ClearUserInfo();
             return RedirectToAction("ResultMessage", "Home");
         }
         public ActionResult Test00()
@@ -154,9 +156,8 @@ namespace ForumWebsite.Controllers
         public ActionResult UserLogin()
         {
             //檢查是否有登入過會員
-            if (string.IsNullOrEmpty(getSessionAccount_Val))
+            if (string.IsNullOrEmpty(Method.getSessionAccount_Val))
             {
-                Method_Cs Method = new Method_Cs();
                 bool isError = false;
                 string userName = Request.Form["userName"].ToString().Trim();
                 string password = Request.Form["password"].ToString().Trim();
@@ -166,7 +167,7 @@ namespace ForumWebsite.Controllers
                 //獲取結果
                 isError = Method.ValueIsEmpty_Val;
                 if (isError) return Redirect(Method.RedirectUrl);
-                user_Tb objItem = Repository_User_P.GetUserInfo_Md(userName);
+                user_Tb objItem = Server_User_P.GetUserInfo_Md(userName);
                 TempData[InternalVal._RESULTMSG] = "登入會員失敗!";
                 //確認是否有該用戶
                 if (objItem == null)
@@ -193,7 +194,7 @@ namespace ForumWebsite.Controllers
                     TempData[InternalVal._RESULTMSG] = Session[InternalVal._SESSIONACCOUNT] + " 已成功登入會員!";
                 }
             }
-            //new Method_Cs().RedirectUrl = "~/Home/Index";
+            //Method.RedirectUrl = "~/Home/Index";
             //return View();
             return RedirectToAction("ResultMessage", "Home");
         }
@@ -202,7 +203,7 @@ namespace ForumWebsite.Controllers
         public ActionResult OutLogin()
         {
             //清除登入資訊
-            ClearUserInfo();
+            Method.ClearUserInfo();
             TempData[InternalVal._RESULTMSG] = "登出成功!";
             return RedirectToAction("ResultMessage", "Home");
         }
@@ -210,12 +211,12 @@ namespace ForumWebsite.Controllers
         #region 會員中心
         public ActionResult UserInfoCenter()
         {
-            if (string.IsNullOrEmpty(getSessionAccount_Val))
+            if (string.IsNullOrEmpty(Method.getSessionAccount_Val))
             {
                 TempData[InternalVal._RESULTMSG] = "請先登入會員!";
                 return RedirectToAction("ResultMessage", "Home");
             }
-            if (!getSessionAccount_Val.Equals(Session[InternalVal._SESSIONACCOUNT].ToString()))
+            if (!Method.getSessionAccount_Val.Equals(Session[InternalVal._SESSIONACCOUNT].ToString()))
             {
                 TempData[InternalVal._RESULTMSG] = "操作錯誤!請勿隨意更改參數!";
                 return RedirectToAction("ResultMessage", "Home");
@@ -223,25 +224,5 @@ namespace ForumWebsite.Controllers
             return View();
         }
         #endregion
-        //獲取Session的Account
-        private string getSessionAccount_Val { get
-            {
-                string val = "";
-                if (Session[InternalVal._SESSIONACCOUNT] != null)
-                    val = Convert.ToString(Session[InternalVal._SESSIONACCOUNT] ?? "").Trim();
-                return val;
-            }
-        }
-        //清除登入資訊
-        private void ClearUserInfo()
-        {
-            Session.RemoveAll();
-            HttpCookie cookie = Request.Cookies[InternalVal._COOKIEUSERINFO];
-            if (cookie != null)
-            {
-                cookie.Expires = DateTime.Now.AddDays(-1);
-                Response.Cookies.Add(cookie);
-            }
-        }
     }
 }

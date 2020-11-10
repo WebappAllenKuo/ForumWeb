@@ -193,7 +193,7 @@
     <Compile Include="Models\Interface\Repository\IRepository_Article.cs" />
     <Compile Include="Models\Interface\Repository\IRepository_Board.cs" />
     <Compile Include="Models\Interface\Repository\IRepository_Users.cs" />
-    <Compile Include="Models\Interface\Service\IServer_User.cs" />
+    <Compile Include="Models\Interface\Service\IService_User.cs" />
     <Compile Include="Models\Interface\Service\IService_Board.cs" />
     <Compile Include="Models\MetaDataModel\user_Tb.cs" />
     <Compile Include="Models\Other\InternalVal.cs" />
@@ -203,7 +203,7 @@
     <Compile Include="Models\Repository\Repository_Article.cs" />
     <Compile Include="Models\Repository\Repository_Board.cs" />
     <Compile Include="Models\Repository\Repository_Users.cs" />
-    <Compile Include="Models\Service\Server_User.cs" />
+    <Compile Include="Models\Service\Service_User.cs" />
     <Compile Include="Models\Service\Service_Board.cs" />
     <Compile Include="Models\SQLHelper\SqlHelper_Cs.cs" />
     <Compile Include="Models\user_Tb.cs">

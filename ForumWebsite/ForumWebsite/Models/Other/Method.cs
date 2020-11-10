@@ -74,6 +74,28 @@ namespace ForumWebsite.Models.Other
         //ResultMessage當前Controller與ActionName網址
         public string currentUrl { private get; set; }
 
+        //清除登入資訊
+        public void ClearUserInfo()
+        {
+            Session.RemoveAll();
+            HttpCookie cookie = System.Web.HttpContext.Current.Request.Cookies[InternalVal._COOKIEUSERINFO];
+            if (cookie != null)
+            {
+                cookie.Expires = DateTime.Now.AddDays(-1);
+                System.Web.HttpContext.Current.Response.Cookies.Add(cookie);
+            }
+        }
+        //獲取Session的Account
+        public string getSessionAccount_Val
+        {
+            get
+            {
+                string val = "";
+                if (Session[InternalVal._SESSIONACCOUNT] != null)
+                    val = Convert.ToString(Session[Other.InternalVal._SESSIONACCOUNT] ?? "").Trim();
+                return val;
+            }
+        }
 
 
     }

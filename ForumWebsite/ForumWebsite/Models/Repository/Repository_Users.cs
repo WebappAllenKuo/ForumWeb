@@ -37,7 +37,7 @@ namespace ForumWebsite.Models.Repository
         /// <summary>
         /// 使用用戶帳號查詢資料
         /// </summary>
-        /// <param name="id">用戶帳號</param>
+        /// <param name="account">用戶帳號</param>
         /// <returns></returns>
         public user_Tb GetUserInfo_Md(string account)
         {
