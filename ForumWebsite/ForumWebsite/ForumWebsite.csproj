@@ -122,6 +122,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="images\6.jpg" />
     <Content Include="images\author\img_h.jpeg" />
     <Content Include="images\index\logo.png" />
     <Content Include="Models\ForumWebsiteDBModel.Context.tt">
@@ -149,6 +150,7 @@
     <Content Include="Scripts\jquery-3.4.1.slim.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
     <Content Include="Scripts\js\all.js" />
+    <Content Include="Scripts\js\functions.js" />
     <Content Include="Scripts\js\jquery.min.js" />
     <Content Include="Scripts\js\responsiveslides.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
@@ -159,6 +161,7 @@
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\ArticleController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Filters\UserLoginCheckAttribute.cs" />
@@ -193,8 +196,10 @@
     <Compile Include="Models\Interface\Repository\IRepository_Article.cs" />
     <Compile Include="Models\Interface\Repository\IRepository_Board.cs" />
     <Compile Include="Models\Interface\Repository\IRepository_Users.cs" />
+    <Compile Include="Models\Interface\Service\IService_Article.cs" />
     <Compile Include="Models\Interface\Service\IService_User.cs" />
     <Compile Include="Models\Interface\Service\IService_Board.cs" />
+    <Compile Include="Models\MetaDataModel\article_reply_Tb.cs" />
     <Compile Include="Models\MetaDataModel\user_Tb.cs" />
     <Compile Include="Models\Other\InternalVal.cs" />
     <Compile Include="Models\Other\Method.cs">
@@ -203,9 +208,13 @@
     <Compile Include="Models\Repository\Repository_Article.cs" />
     <Compile Include="Models\Repository\Repository_Board.cs" />
     <Compile Include="Models\Repository\Repository_Users.cs" />
+    <Compile Include="Models\Service\Service_Article.cs" />
     <Compile Include="Models\Service\Service_User.cs" />
     <Compile Include="Models\Service\Service_Board.cs" />
     <Compile Include="Models\SQLHelper\SqlHelper_Cs.cs" />
+    <Compile Include="Models\UpdateArticle_Result.cs">
+      <DependentUpon>ForumWebsiteDBModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\user_Tb.cs">
       <DependentUpon>ForumWebsiteDBModel.tt</DependentUpon>
     </Compile>
@@ -236,6 +245,14 @@
     <Content Include="Views\User\UpdateUserInfo.cshtml" />
     <Content Include="Views\User\UserInfoCenter.cshtml" />
     <Content Include="Views\User\Test00.cshtml" />
+    <Content Include="Views\Article\BoardArticle.cshtml" />
+    <Content Include="Views\Shared\_RightArticleReply.cshtml" />
+    <Content Include="Views\Home\_NewArticle.cshtml" />
+    <Content Include="Views\Home\_LeftHotArticle.cshtml" />
+    <Content Include="Views\Article\ReviewArticle.cshtml" />
+    <Content Include="Views\Article\LaunchArticle.cshtml" />
+    <Content Include="Views\Article\ReplyArticle.cshtml" />
+    <Content Include="Views\Article\EditReply.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

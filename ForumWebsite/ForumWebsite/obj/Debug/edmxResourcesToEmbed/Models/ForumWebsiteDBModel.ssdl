@@ -25,12 +25,15 @@
     <Property Name="arti_theme" Type="int" />
     <Property Name="board_id" Type="int" Nullable="false" />
     <Property Name="user_id" Type="int" Nullable="false" />
+    <Property Name="numNo" Type="varchar" MaxLength="50" Nullable="false" />
   </EntityType>
   <EntityType Name="board_Tb">
     <Key>
-      <PropertyRef Name="board_ID" />
+      <PropertyRef Name="id" />
     </Key>
-    <Property Name="board_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="theme_board_id" Type="int" />
+    <Property Name="theme_name" Type="nvarchar" MaxLength="50" />
     <Property Name="board_name" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="user_Tb">
@@ -51,7 +54,7 @@
     <End Role="article_Tb" Type="Self.article_Tb" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="board_Tb">
-        <PropertyRef Name="board_ID" />
+        <PropertyRef Name="id" />
       </Principal>
       <Dependent Role="article_Tb">
         <PropertyRef Name="board_id" />
@@ -94,6 +97,9 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Function Name="UpdateArticle" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="article_id" Type="int" Mode="In" />
+  </Function>
   <EntityContainer Name="ForumWebsiteDBModelStoreContainer">
     <EntitySet Name="article_reply_Tb" EntityType="Self.article_reply_Tb" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="article_Tb" EntityType="Self.article_Tb" Schema="dbo" store:Type="Tables" />

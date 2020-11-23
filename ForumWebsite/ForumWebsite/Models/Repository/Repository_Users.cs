@@ -105,17 +105,17 @@ namespace ForumWebsite.Models.Repository
                 }
                 //更新密碼，因為模型限制只能5-16字元
                 //加密
-                string passwd = new Method_Cs().GetMD5_Md(updateUserInfo.password).Trim();
-                string strSql = "update user_tb set password = @passwd where user_id = @userId";
-                SqlParameter[] sqlParameters = new SqlParameter[]
-                {
-                    new SqlParameter("@passwd", SqlDbType.NVarChar),
-                    new SqlParameter("@userId", SqlDbType.Int)
-                };
-                sqlParameters[0].Value = passwd;
-                sqlParameters[1].Value = objItem.user_id;
-                bool result = SqlHelper.ExecuteNonQuery(SqlHelper.ConnectionStringLocalTransaction, CommandType.Text, strSql, sqlParameters)>=1;
-                if (!result) return false;
+                //string passwd = new Method_Cs().GetMD5_Md(updateUserInfo.password).Trim();
+                //string strSql = "update user_tb set password = @passwd where user_id = @userId";
+                //SqlParameter[] sqlParameters = new SqlParameter[]
+                //{
+                //    new SqlParameter("@passwd", SqlDbType.NVarChar),
+                //    new SqlParameter("@userId", SqlDbType.Int)
+                //};
+                //sqlParameters[0].Value = passwd;
+                //sqlParameters[1].Value = objItem.user_id;
+                //bool result = SqlHelper.ExecuteNonQuery(SqlHelper.ConnectionStringLocalTransaction, CommandType.Text, strSql, sqlParameters)>=1;
+                //if (!result) return false;
                 return true;
 
             }

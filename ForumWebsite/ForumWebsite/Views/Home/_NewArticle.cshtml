@@ -1,0 +1,31 @@
+﻿@model ForumWebsite.Models.HomeViewModel
+<div class="col-md-6 posta">
+    <h3>
+        最新 <strong>發表文章</strong>
+        <label1></label1>
+    </h3>
+    <div class="posta-top">
+        @{ 
+            var articleList = Model.articleList;
+            var boardList = Model.boardList;
+            var userList = Model.userInfoList;
+        }
+        @for (int i=0; i < articleList.Count(); i++)
+        {
+            <div class="posta-1">
+                <div class="posta-left">
+                    <a href="single.html"><img src="images/7.jpg" class="img-responsive" alt=""></a>
+                </div>
+                <div class="posta-right">
+                    <h4><a href="/Article/ReviewArticle?article=@(Model.articleList[i].arti_id)&theme=@(Model.boardList[i].id)&board=@(Model.boardList[i].theme_board_id)">@articleList[i].title</a></h4>
+                    <p>@articleList[i].arti_txt</p>
+
+                    <span class="sort_t org">@boardList[i].board_name</span>
+                    <span class="itac">@userList[i].username<i class="dot_"></i><i class="far fa-clock"></i> @articleList[i].arti_date.ToString()</span>
+                </div>
+                <div class="clearfix"> </div>
+                <a class="anabtn" href="single.html">Análise</a>
+            </div>
+        }
+    </div>
+</div>

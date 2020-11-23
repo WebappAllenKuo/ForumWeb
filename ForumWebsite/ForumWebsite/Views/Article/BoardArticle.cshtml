@@ -1,0 +1,66 @@
+﻿@model ForumWebsite.Models.HomeViewModel
+    @{ 
+        string boardName = (string.IsNullOrEmpty(Model.boardItem.board_name))? "" : Model.boardItem.board_name;
+    }
+
+<div class="indica">
+    <div class="container">
+        <div class="col-md-9 posta">
+            <font class="article_t">搜尋此討論版：</font>
+            <form class="article_search">
+                <input name=""><button type="submit"><i class="fas fa-search"></i></button><select>
+                    <option>全部主題</option>
+                    @foreach (var item in Model.boardList)
+                    {
+                        <option value="@(item.id)">@item.theme_name</option>
+                    }
+                </select>
+                <input hidden="board" value="@(ViewBag.boardId)" />
+            </form>
+            <div class="board_sort">
+                <ul>
+                    <li><a href="/Article/BoardArticle?board=@(Model.boardItem.id)">全部主題</a></li>
+                    @foreach (var item in Model.boardList)
+                    {
+                        <li><a href="/Article/BoardArticle?theme=@(item.id)&board=@(item.theme_board_id)">@item.theme_name</a></li>
+                    }
+                </ul>
+            </div>
+            <h3>
+                <strong>@(Model.boardItem.board_name) 討論版</strong>
+                <label1></label1>
+            </h3>
+            <div class="posta-top">
+                @for (int i=0; i < Model.articleList.Count(); i++)
+                {
+                    <div class="posta-1">
+                        <div class="posta-left">
+                            <a href="single.html"><img src="images/7.jpg" class="img-responsive" alt=""></a>
+                        </div>
+                        <div class="posta-right">
+                            @{ string url = "article=" + @Model.articleList[i].arti_id + "&board=" + Model.boardItem.id + "&theme=" + Model.articleList[i].arti_theme; }
+                            <h4><a href="/Article/ReviewArticle?@(url)">@(Model.articleList[i].title)</a></h4>
+                            <p>@(Model.articleList[i].arti_txt)</p>
+                            <span class="itac">@(Model.userInfoList[i].username)<i class="dot_"></i><i class="far fa-clock"></i> @(Model.articleList[i].arti_date)<i class="dot_"></i><i class="fas fa-comment-dots"></i> @(Model.replyCountList[i])<i class="dot_"></i></span>
+                        </div>
+                        <div class="clearfix"> </div>
+                        <a class="anabtn" href="single.html">Análise</a>
+                    </div>
+                }
+
+                <div class="p_index">
+                    <span><a href="#"><i class="fas fa-angle-left"></i></a></span>
+                    <ul>
+                        <li><a href="#">1</a></li>
+                    </ul>
+                    <span><a href="#"><i class="fas fa-angle-right"></i></a></span>
+                </div>
+            </div>
+        </div>
+        @{
+            Html.RenderAction("_RightArticleReply", "Home");
+        }
+        <div class="clearfix"> </div>
+    </div>
+</div>
+

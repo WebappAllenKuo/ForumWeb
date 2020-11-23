@@ -13,25 +13,32 @@ namespace ForumWebsite.Filters
         public UserLoginCheckAttribute() { this.Order = int.MaxValue; }
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
+            Method_Cs Method = new Method_Cs();
             var objController = filterContext.Controller;
             var S_account = filterContext.HttpContext.Session[InternalVal._SESSIONACCOUNT];
             var C_userInfo = filterContext.HttpContext.Request.Cookies[InternalVal._COOKIEUSERINFO];
             string LoginName = Convert.ToString(S_account ?? "").Trim();
+            //filterContext.HttpContext.Session["s01"] = 55;
+            //filterContext.HttpContext.Session["s02"] = 56;
             if (LoginName == "" && C_userInfo != null)
             {
-                string userName = C_userInfo[InternalVal._COOKIEACCOUNT].ToString();
-                //如果cookie有資料並把資料傳遞給session
-                S_account = userName;
-                filterContext.HttpContext.Session[InternalVal._SESSIONNAME] = filterContext.HttpContext.Request.Cookies[InternalVal._COOKIEUSERINFO][InternalVal._COOKIEANAME].ToString();
-                //清除cookie登入資料
-                C_userInfo.Expires = DateTime.Now.AddDays(-1);
-                //COOKIE寫入至客戶端
-                filterContext.HttpContext.Request.Cookies.Add(C_userInfo);
-                //給予SessionID
-                //filterContext.HttpContext.Session["sessionID"] = filterContext.HttpContext.Session.SessionID + userName;
-                //filterContext.HttpContext.Session["sessionIdCompare"] = filterContext.HttpContext.Session.SessionID + userName;
+                //filterContext.HttpContext.Session["s01"] = C_userInfo[InternalVal._COOKIEACCOUNT];
+                //filterContext.HttpContext.Session["s02"] = C_userInfo[InternalVal._COOKIEANAME];
+                filterContext.HttpContext.Session[InternalVal._SESSIONACCOUNT] = C_userInfo[InternalVal._COOKIEACCOUNT];
+                filterContext.HttpContext.Session[InternalVal._SESSIONNAME] = C_userInfo[InternalVal._COOKIEANAME];
+                //清除客戶端cookie登入資料
+                //C_userInfo.Value = "";
+                //COOKIE更值須寫入才會變更
+                filterContext.HttpContext.Response.Cookies.Add(C_userInfo);
             }
+            S_account = filterContext.HttpContext.Session[InternalVal._SESSIONACCOUNT];
             S_account = Convert.ToString(S_account ?? "").Trim();
+            if (string.IsNullOrEmpty(S_account.ToString()))
+            {
+                objController.TempData[InternalVal._RESULTMSG] = "請先登入會員!";
+                filterContext.HttpContext.Session["notLoginDriectUrl"] = "/Home/Index";
+                filterContext.HttpContext.Response.RedirectToRoute(new { controller = "Home", action = "ResultMessage" });
+            }
         }
     }
 }

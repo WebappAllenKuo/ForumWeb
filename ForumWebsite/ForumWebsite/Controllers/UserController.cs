@@ -12,7 +12,6 @@ using ForumWebsite.Filters;
 
 namespace ForumWebsite.Controllers
 {
-    [UserLoginCheck]
     public class UserController : Controller
     {
         private Method_Cs Method = new Method_Cs();
@@ -103,9 +102,10 @@ namespace ForumWebsite.Controllers
         }
         #endregion
         #region 更新會員
+        [UserLoginCheck]
         public ActionResult UpdateUserInfo(string user)
         {
-            //檢查是否已登入會員
+            //檢查登入會員與SESSION是否相同
             if (user != Method.getSessionAccount_Val)
             {
                 TempData[InternalVal._RESULTMSG] = "請先登入會員!";
@@ -116,12 +116,9 @@ namespace ForumWebsite.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [UserLoginCheck]
         public ActionResult UpdateUserInfoCheck(user_Tb objItem)
         {
-            if (!ModelState.IsValid)
-            {
-                return View("UpdateUserInfo", objItem);
-            }
             //檢查是否已登入會員
             if (string.IsNullOrEmpty(Method.getSessionAccount_Val))
             {
@@ -130,8 +127,20 @@ namespace ForumWebsite.Controllers
             }
             //給予帳號與ID
             objItem.account = Method.getSessionAccount_Val;
-            objItem.user_id = int.Parse(Request.Form["userId"]);
-            bool result = Server_User_P.UpdateUser_Md(objItem);
+            objItem.user_id = int.Parse(Request.Form["userId"].ToString());
+            user_Tb userItem = new user_Tb();
+            userItem = Server_User_P.GetUserInfo_Md(objItem.user_id);
+            if (userItem.account != objItem.account)
+            {
+                TempData[InternalVal._RESULTMSG] = "會員資料更新失敗!";
+                return RedirectToAction("ResultMessage", "Home");
+            }
+            //放入更新項目
+            userItem.username = objItem.username;
+            userItem.gender = objItem.gender;
+            userItem.birthday = objItem.birthday;
+            userItem.email = objItem.email;
+            bool result = Server_User_P.UpdateUser_Md(userItem);
             string msg = "會員資料更新成功!<br />請重新登入會員!";
             if (!result) { msg = "會員資料更新失敗!"; }
             TempData[InternalVal._RESULTMSG] = msg;
@@ -183,11 +192,16 @@ namespace ForumWebsite.Controllers
                     HttpCookie cookie = new HttpCookie(InternalVal._COOKIEUSERINFO);
                     cookie.Values.Add(InternalVal._COOKIEACCOUNT, userName);
                     cookie.Values.Add(InternalVal._COOKIEANAME, objItem.username);
+                    cookie.Values.Add("userVerify", Method.GetMD5HashPassword_Md(objItem.password));
                     //cookie保存2天
                     cookie.Expires = DateTime.Now.AddDays(2);
                     Response.Cookies.Add(cookie);
+                    HttpCookie UserSession = new HttpCookie("UserSession");
+                    UserSession.Values.Add("TestSessionID", Session.SessionID);
                     Session[InternalVal._SESSIONACCOUNT] = objItem.account;
                     Session[InternalVal._SESSIONNAME] = objItem.username;
+                    cookie.Expires = DateTime.Now.AddDays(2);
+                    Response.Cookies.Add(UserSession);
                     //給予SessionID
                     //Session["sessionID"] = Session.SessionID + userName;
                     //Session["sessionIdCompare"] = Session.SessionID + userName;
@@ -209,18 +223,19 @@ namespace ForumWebsite.Controllers
         }
         #endregion
         #region 會員中心
+        [UserLoginCheck]
         public ActionResult UserInfoCenter()
         {
-            if (string.IsNullOrEmpty(Method.getSessionAccount_Val))
-            {
-                TempData[InternalVal._RESULTMSG] = "請先登入會員!";
-                return RedirectToAction("ResultMessage", "Home");
-            }
-            if (!Method.getSessionAccount_Val.Equals(Session[InternalVal._SESSIONACCOUNT].ToString()))
-            {
-                TempData[InternalVal._RESULTMSG] = "操作錯誤!請勿隨意更改參數!";
-                return RedirectToAction("ResultMessage", "Home");
-            }
+            //if (string.IsNullOrEmpty(Method.getSessionAccount_Val))
+            //{
+            //    TempData[InternalVal._RESULTMSG] = "請先登入會員!";
+            //    return RedirectToAction("ResultMessage", "Home");
+            //}
+            //if (!Method.getSessionAccount_Val.Equals(Session[InternalVal._SESSIONACCOUNT].ToString()))
+            //{
+            //    TempData[InternalVal._RESULTMSG] = "操作錯誤!請勿隨意更改參數!";
+            //    return RedirectToAction("ResultMessage", "Home");
+            //}
             return View();
         }
         #endregion

@@ -1,0 +1,55 @@
+﻿@model ForumWebsite.Models.HomeViewModel
+@{
+    ViewBag.Title = "LaunchArticle";
+}
+
+<div class="indica article_in article_reply article_add">
+    <div class="container">
+        <div class="col-md-9 posta">
+            <div class="article_storey">
+                <div class="article_box col-md-12">
+                    <form id="myform" name="myform" method="post" action="/Article/CheckReplyInfo">
+                        @Html.AntiForgeryToken()
+                        <div class="info_box">
+                            <strong>@(Model.articleItem.title)</strong>
+                            <div>
+                                <span class="art_s"><a class="sort" href="/Article/BoardArticle?board=@(Model.boardItem.theme_board_id)">@(Model.boardItem.board_name)</a></span>
+                                <span class="art_num">
+                                    <font>@(Model.articleItem.arti_update)</font>
+                                    <font><i class="far fa-comment"></i> @(Model.replyCount)</font> <font>
+                                        瀏覽人數 @(Model.articleItem.view_num)
+                                    </font>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="article_txt">
+                            <div class="board_sele">
+                                @if ((bool)TempData["replyAuthor"])
+                                {
+                                    <p>"回覆樓主"</p>
+                                }
+                                else
+                                {
+                                    <p>@(Model.articleItem.arti_txt)</p>
+                                }
+                                <textarea id="article_txt" name="article_txt">@(Model.articleItem.arti_txt)</textarea>
+
+                            </div>
+                            <div class="other_fun">
+                                @Html.Hidden("article", Model.articleItem.arti_id)
+                                <a class="edit_but_sub" title="我要回覆" href="javascript:void(0);"
+                                   onclick="cofirm_mesf(document.myform, '確定回覆嗎?')"><i class="fas fa-reply"></i> 我要回覆</a>
+                                <a title="取消" href=""><i class="fas fa-backspace"></i> 取消回覆</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+        @{ Html.RenderAction("_RightArticleReply", "Home"); }
+        <div class="clearfix"></div>
+    </div>
+</div>
+
+

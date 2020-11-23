@@ -1,0 +1,91 @@
+﻿@model ForumWebsite.Models.HomeViewModel
+@{
+    ViewBag.Title = "LaunchArticle";
+}
+
+<div class="indica article_in article_reply article_add">
+    <div class="container">
+        <div class="col-md-9 posta">
+            <div class="article_storey">
+                <h3>發佈<strong>討論版文章</strong></h3>
+                <div class="article_box col-md-12">
+                    <form id="myform" name="myform" method="post" action="/Article/CheckArticleInfo">
+                        @Html.AntiForgeryToken()
+                        <div class="info_box">
+                            <strong><input class="title" name="title" value="" /></strong>
+                        </div>
+                        <div class="article_txt">
+                            <div class="board_sele">
+                                討論版：
+                                @if (Model.boardItem.theme_board_id != null)
+                                {
+                                    @Model.boardItem.board_name
+                                    @Html.Hidden("board_id", Model.boardItem.theme_board_id)
+                                }
+                                else
+                                {
+                                    <script>
+                                        function themeOrder(date) {
+                                            $(function () {
+                                                if (date == 0 || date == "") return $("#theme_id").html("<option value=''>請選擇</option>");
+                                                $.get("/Article/LaunchArticleTheme", { board: date }, function (datas) { getOrder(datas) });
+                                                function getOrder(datas) {
+                                                    var str = "<option value=''>請選擇</option>", jsonNum = 0;
+                                                    for (i = 0; i < datas.length; i++) {
+                                                        str += "<option value='" + datas[i]['id'] + "'>" + datas[i]['theme_name'] + "</option>";
+                                                    }
+                                                    $("#theme_id").html(str);
+                                                }
+                                            });
+                                        }
+                                    </script>
+                                    <select id="board" name="board_id" onchange="themeOrder(this.value)">
+                                        <option value="0">請選擇</option>
+                                        @foreach (var item in Model.boardList)
+                                        {
+                                            if (item.id == Model.boardItem.theme_board_id)
+                                            {
+                                                <option value="@item.id" selected>@item.board_name</option>
+                                            }
+                                            else
+                                            {
+                                                <option value="@item.id">@item.board_name</option>
+                                            }
+                                        }
+                                    </select>
+                                }
+                                討論版分類：
+                                <select id="theme_id" name="theme_id">
+                                    <option value="0">請選擇</option>
+                                    @foreach (var item in Model.themeList)
+                                    {
+                                        if (item.id == Model.boardItem.id)
+                                        {
+                                            <option value="@item.id" selected>@item.theme_name</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@item.id">@item.theme_name</option>
+                                        }
+                                    }
+                                </select>
+                            </div>
+                            <textarea name="article_txt"></textarea>
+
+                        </div>
+                        <div class="other_fun">
+                            <a class="edit_but_sub" title="我要發佈" href="/Home"
+                               onclick="cofirm_mesf(document.myform, '確定發佈文章嗎?')"><i class="fas fa-check"></i> 我要發佈</a>
+                            <a title="取消" href="javascript:history.go(-1);"><i class="fas fa-backspace"></i> 取消發佈</a>
+                        </div>
+                    </form>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+        @{ Html.RenderAction("_RightArticleReply", "Home"); }
+        <div class="clearfix"></div>
+    </div>
+</div>
+
+

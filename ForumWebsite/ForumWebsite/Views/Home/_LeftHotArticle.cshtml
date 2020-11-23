@@ -1,0 +1,35 @@
+﻿@model ForumWebsite.Models.HomeViewModel
+@{
+    string replyUserName = "暫無";
+    DateTime replyDate;
+}
+<div class="col-md-3 dicado">
+    <h3>
+        超級 <strong>熱門文章</strong>
+        <label2></label2>
+    </h3>
+    <div class="ultimas">
+        <label4></label4>
+        @for (int i = 0; i < Model.articleList.Count(); i++)
+        {
+            if (Model.replyAritlceList.Count() > i)
+            {
+                replyUserName = Model.userInfoList[i].username;
+                replyDate = Model.replyAritlceList[i].reply_date;
+            }
+            else
+            {
+                replyUserName = "暫無";
+            }
+            <div class="ultimas-top">
+                <span class="ultimas-num">0@(i+1)</span>
+                <span class="sort_t blue">@Model.boardList[i].board_name</span>
+                <h5><a href="/Article/ReviewArticle?article=@(Model.articleList[i].arti_id)&theme=@(Model.boardList[i].id)&board=@(Model.boardList[i].theme_board_id)">@(Model.articleList[i].title)</a></h5>
+                <span class="itac">
+                    最新回覆 : @replyUserName<br />
+                </span><br />
+                <div class="clearfix"> </div>
+            </div>
+        }
+    </div>
+</div>

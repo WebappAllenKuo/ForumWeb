@@ -27,15 +27,18 @@
     <Property Name="arti_theme" Type="Int32" />
     <Property Name="board_id" Type="Int32" Nullable="false" />
     <Property Name="user_id" Type="Int32" Nullable="false" />
+    <Property Name="numNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <NavigationProperty Name="article_reply_Tb" Relationship="Self.FK_article_reply_article" FromRole="article_Tb" ToRole="article_reply_Tb" />
     <NavigationProperty Name="board_Tb" Relationship="Self.FK_article_board" FromRole="article_Tb" ToRole="board_Tb" />
     <NavigationProperty Name="user_Tb" Relationship="Self.FK_article_user" FromRole="article_Tb" ToRole="user_Tb" />
   </EntityType>
   <EntityType Name="board_Tb">
     <Key>
-      <PropertyRef Name="board_ID" />
+      <PropertyRef Name="id" />
     </Key>
-    <Property Name="board_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="theme_board_id" Type="Int32" />
+    <Property Name="theme_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="board_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="article_Tb" Relationship="Self.FK_article_board" FromRole="board_Tb" ToRole="article_Tb" />
   </EntityType>
@@ -83,7 +86,7 @@
     <End Role="article_Tb" Type="Self.article_Tb" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="board_Tb">
-        <PropertyRef Name="board_ID" />
+        <PropertyRef Name="id" />
       </Principal>
       <Dependent Role="article_Tb">
         <PropertyRef Name="board_id" />
@@ -123,5 +126,21 @@
       <End Role="user_Tb" EntitySet="user_Tb" />
       <End Role="article_Tb" EntitySet="article_Tb" />
     </AssociationSet>
+    <FunctionImport Name="UpdateArticle" ReturnType="Collection(ForumWebsiteDBModel.UpdateArticle_Result)">
+      <Parameter Name="article_id" Mode="In" Type="Int32" />
+    </FunctionImport>
   </EntityContainer>
+  <ComplexType Name="UpdateArticle_Result">
+    <Property Type="Int32" Name="arti_id" Nullable="false" />
+    <Property Type="String" Name="title" Nullable="false" MaxLength="100" />
+    <Property Type="DateTime" Name="arti_date" Nullable="false" Precision="23" />
+    <Property Type="DateTime" Name="arti_update" Nullable="false" Precision="23" />
+    <Property Type="String" Name="arti_txt" Nullable="true" MaxLength="500" />
+    <Property Type="Int64" Name="view_num" Nullable="true" />
+    <Property Type="Boolean" Name="arti_top" Nullable="true" />
+    <Property Type="Int32" Name="arti_theme" Nullable="true" />
+    <Property Type="Int32" Name="board_id" Nullable="false" />
+    <Property Type="Int32" Name="user_id" Nullable="false" />
+    <Property Type="String" Name="numNo" Nullable="false" MaxLength="50" />
+  </ComplexType>
 </Schema>

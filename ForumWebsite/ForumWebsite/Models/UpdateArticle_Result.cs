@@ -10,16 +10,9 @@
 namespace ForumWebsite.Models
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class article_Tb
+    public partial class UpdateArticle_Result
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public article_Tb()
-        {
-            this.article_reply_Tb = new HashSet<article_reply_Tb>();
-        }
-    
         public int arti_id { get; set; }
         public string title { get; set; }
         public System.DateTime arti_date { get; set; }
@@ -31,10 +24,5 @@ namespace ForumWebsite.Models
         public int board_id { get; set; }
         public int user_id { get; set; }
         public string numNo { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<article_reply_Tb> article_reply_Tb { get; set; }
-        public virtual board_Tb board_Tb { get; set; }
-        public virtual user_Tb user_Tb { get; set; }
     }
 }

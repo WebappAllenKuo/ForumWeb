@@ -4,11 +4,11 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="ac5e7d152c104beba8607a89eeeced08" Name="Diagram1">
-        <EntityTypeShape EntityType="ForumWebsiteDBModel.article_reply_Tb" Width="1.5" PointX="3" PointY="3.25" IsExpanded="true" />
+      <Diagram DiagramId="cd2bca1115174b928119ab5e916e0111" Name="Diagram1">
+        <EntityTypeShape EntityType="ForumWebsiteDBModel.article_reply_Tb" Width="1.5" PointX="3" PointY="3.5" IsExpanded="true" />
         <EntityTypeShape EntityType="ForumWebsiteDBModel.article_Tb" Width="1.5" PointX="6" PointY="2.875" IsExpanded="true" />
         <EntityTypeShape EntityType="ForumWebsiteDBModel.board_Tb" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ForumWebsiteDBModel.user_Tb" Width="1.5" PointX="0.75" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ForumWebsiteDBModel.user_Tb" Width="1.5" PointX="0.75" PointY="3.25" IsExpanded="true" />
         <AssociationConnector Association="ForumWebsiteDBModel.FK_article_reply_article" ManuallyRouted="false" />
         <AssociationConnector Association="ForumWebsiteDBModel.FK_article_reply_user" ManuallyRouted="false" />
         <AssociationConnector Association="ForumWebsiteDBModel.FK_article_board" ManuallyRouted="false" />

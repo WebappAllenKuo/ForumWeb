@@ -48,7 +48,6 @@
   left: 55%;
 }
 .article_search select {
-  display: none;
   border: 1px solid #ccc;
   padding: 0.6em;
 }
@@ -78,7 +77,6 @@
 /*--page_index_button--*/
 .p_index {
     text-align: center;
-    display: none;
     margin-top: 30px;
 }
 .p_index span, .p_index li  {
@@ -147,7 +145,7 @@ font-size: .9em;
 
 /*--article_in--*/
 .article_in .article_storey {
-    border-bottom:3px solid rgb(0, 185, 108);
+  border-bottom: 3px solid rgb(28, 143, 66);
   padding-bottom: 50px;
   margin-bottom: 30px;
 }
@@ -157,17 +155,16 @@ font-size: .9em;
   margin-bottom:0;
 }
 .article_in .author_box {
+  width: 20%;
   float: left;
-  padding: 0;
-  padding-right: 3%;
+  margin-right: 3%;
 }
 .article_in .article_box
 {
+  width: 77%;
   float: left;
-  padding: 0;
 }
 .article_in .author_box .head_img {
-    display:none;
 }
 .article_in .author_box .head_img img {
   text-align: center;
@@ -242,7 +239,6 @@ font-size: .9em;
 }
 .article_in .article_box .article_txt {
   line-height: 1.8;
-  min-height: 150px;
   margin-bottom: 30px;
 }
 .article_in .article_box .article_txt p {
@@ -251,7 +247,7 @@ font-size: .9em;
 .article_in .article_box .other_fun {
   text-align: right;
 }
-.article_in .article_box .other_fun > a, .article_in .article_box .other_fun span.edit_but {
+.article_in .article_box .other_fun > a {
   color: #fff;
   background-color: rgb(230, 164, 42);
   display: inline-block;
@@ -263,7 +259,12 @@ font-size: .9em;
   background-color: rgb(230, 133, 42);
 }
 .article_in .article_box .other_fun span.edit_but {
+  color: #fff;
   background-color: rgb(212, 212, 212);
+  display: inline-block;
+  padding: .5em 1em;
+  margin-left: .5em;
+  border-radius: 3px;
   transition: .5s;
   cursor: pointer;
 }
@@ -329,34 +330,3 @@ font-size: .9em;
   border-bottom: 0;
 }
 /*--article_in end--*/
-/*--article_reply--*/
-.article_reply .article_storey input.title, .article_reply .article_storey textarea {
-  font-size: 1.3rem;
-  width: 100%;
-  padding: .8rem;
-  border-radius: 5px;
-  border: 1px solid #aaa;
-}
-.article_reply .article_storey textarea {
-  font-size: 1rem;
-  min-height: 500px;
-  resize: none;
-}
-.article_reply .article_box .other_fun > a.edit_but_sub {
-  background-color: rgb(116, 189, 0);
-}
-.article_reply .article_box .other_fun > a.edit_but_sub:hover {  
-  background-color: rgb(101, 163, 0);
-}
-/*--article_reply end--*/
-/*--article_add--*/
-.article_add .board_sele {
-  padding-bottom: 15px;
-}
-.article_add .board_sele select {
-  font-size: 1rem;
-  border:1px solid #aaa;
-  border-radius: 3px;
-  padding: .5rem 1rem;
-}
-/*--article_add end--*/

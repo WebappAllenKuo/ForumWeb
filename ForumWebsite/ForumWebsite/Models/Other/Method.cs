@@ -42,6 +42,7 @@ namespace ForumWebsite.Models.Other
             string md5 = System.Web.Security.FormsAuthentication.HashPasswordForStoringInConfigFile(input, "MD5");
             return md5.ToString();
         }
+        //是否無值
         public void ValueIsEmpty<T>(in T value)
         {
             string s = value.ToString();
@@ -54,17 +55,23 @@ namespace ForumWebsite.Models.Other
         public string RedirectUrl {
             get
             {
-                string url = "";
+                //預設為回到首頁
+                string url = "/Home/Index";
                 //Session["driectUrl"] 設定值在_Header.cshtml
                 if (Session["driectUrl"] != null)
                 {
-                    url = Convert.ToString(Session["driectUrl"].ToString() ?? "").Trim();
+                    url = (!Session["driectUrl"].Equals("")) ? Session["driectUrl"].ToString() : url;
                 }
-                if (string.IsNullOrEmpty(url)) url = "/Home/Index";   //為空則回到首頁
-                //如果回傳網址與當前位置相同則回到首頁
-                if (url == currentUrl) url = "/Home/Index";
+                //如果回傳網址與ResultMessage()位置相同則回到首頁
+                if (url.Equals(currentUrl)) url = "/Home/Index";
+                //如果未登錄則跳轉至首頁(UserLoginCheckAttribute)
+                if (Session["notLoginDriectUrl"] != null)
+                {
+                    url = (!Session["notLoginDriectUrl"].Equals("")) ? Session["notLoginDriectUrl"].ToString() : url;
+                    Session["notLoginDriectUrl"] = "";
+                }
                 Session["driectUrl"] = "";
-                return url;
+                return url.Trim();
             }
             set
             {
@@ -78,11 +85,14 @@ namespace ForumWebsite.Models.Other
         public void ClearUserInfo()
         {
             Session.RemoveAll();
-            HttpCookie cookie = System.Web.HttpContext.Current.Request.Cookies[InternalVal._COOKIEUSERINFO];
+            HttpCookie cookie = System.Web.HttpContext.Current.Response.Cookies[InternalVal._COOKIEUSERINFO];
             if (cookie != null)
-            {
+            {   
+
+                //清除客戶端cookie登入資料
                 cookie.Expires = DateTime.Now.AddDays(-1);
-                System.Web.HttpContext.Current.Response.Cookies.Add(cookie);
+                //COOKIE寫入至客戶端
+                //System.Web.HttpContext.Current.Response.Cookies.Add(cookie);
             }
         }
         //獲取Session的Account
@@ -95,6 +105,13 @@ namespace ForumWebsite.Models.Other
                     val = Convert.ToString(Session[Other.InternalVal._SESSIONACCOUNT] ?? "").Trim();
                 return val;
             }
+        }
+        public string StrSubstring(string str, int start, int end)
+        {
+            if (str.Length > end)
+                return (str != null && end > start) ? str.Substring(start, end - 1) + "..." : "發生錯誤!";
+            else
+                return str;
         }
 
 

@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using System.Web.Mvc;
+using ForumWebsite.Models.Interface.Repository;
 
-namespace ForumWebsite.Models.Interface.Repository
+namespace ForumWebsite.Models.Interface.Service
 {
-    public interface IRepository_Article
+    public interface IService_Article
     {
         #region 文章內容
         /// <summary>

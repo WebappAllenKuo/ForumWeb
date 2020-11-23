@@ -30,12 +30,15 @@
           <Property Name="arti_theme" Type="int" />
           <Property Name="board_id" Type="int" Nullable="false" />
           <Property Name="user_id" Type="int" Nullable="false" />
+          <Property Name="numNo" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="board_Tb">
           <Key>
-            <PropertyRef Name="board_ID" />
+            <PropertyRef Name="id" />
           </Key>
-          <Property Name="board_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="theme_board_id" Type="int" />
+          <Property Name="theme_name" Type="nvarchar" MaxLength="50" />
           <Property Name="board_name" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="user_Tb">
@@ -56,7 +59,7 @@
           <End Role="article_Tb" Type="Self.article_Tb" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="board_Tb">
-              <PropertyRef Name="board_ID" />
+              <PropertyRef Name="id" />
             </Principal>
             <Dependent Role="article_Tb">
               <PropertyRef Name="board_id" />
@@ -99,6 +102,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="UpdateArticle" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="article_id" Type="int" Mode="In" />
+        </Function>
         <EntityContainer Name="ForumWebsiteDBModelStoreContainer">
           <EntitySet Name="article_reply_Tb" EntityType="Self.article_reply_Tb" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="article_Tb" EntityType="Self.article_Tb" Schema="dbo" store:Type="Tables" />
@@ -153,15 +159,18 @@
           <Property Name="arti_theme" Type="Int32" />
           <Property Name="board_id" Type="Int32" Nullable="false" />
           <Property Name="user_id" Type="Int32" Nullable="false" />
+          <Property Name="numNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="article_reply_Tb" Relationship="Self.FK_article_reply_article" FromRole="article_Tb" ToRole="article_reply_Tb" />
           <NavigationProperty Name="board_Tb" Relationship="Self.FK_article_board" FromRole="article_Tb" ToRole="board_Tb" />
           <NavigationProperty Name="user_Tb" Relationship="Self.FK_article_user" FromRole="article_Tb" ToRole="user_Tb" />
         </EntityType>
         <EntityType Name="board_Tb">
           <Key>
-            <PropertyRef Name="board_ID" />
+            <PropertyRef Name="id" />
           </Key>
-          <Property Name="board_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="theme_board_id" Type="Int32" />
+          <Property Name="theme_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="board_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="article_Tb" Relationship="Self.FK_article_board" FromRole="board_Tb" ToRole="article_Tb" />
         </EntityType>
@@ -209,7 +218,7 @@
           <End Role="article_Tb" Type="Self.article_Tb" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="board_Tb">
-              <PropertyRef Name="board_ID" />
+              <PropertyRef Name="id" />
             </Principal>
             <Dependent Role="article_Tb">
               <PropertyRef Name="board_id" />
@@ -249,7 +258,23 @@
             <End Role="user_Tb" EntitySet="user_Tb" />
             <End Role="article_Tb" EntitySet="article_Tb" />
           </AssociationSet>
+          <FunctionImport Name="UpdateArticle" ReturnType="Collection(ForumWebsiteDBModel.UpdateArticle_Result)">
+            <Parameter Name="article_id" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
+        <ComplexType Name="UpdateArticle_Result">
+          <Property Type="Int32" Name="arti_id" Nullable="false" />
+          <Property Type="String" Name="title" Nullable="false" MaxLength="100" />
+          <Property Type="DateTime" Name="arti_date" Nullable="false" Precision="23" />
+          <Property Type="DateTime" Name="arti_update" Nullable="false" Precision="23" />
+          <Property Type="String" Name="arti_txt" Nullable="true" MaxLength="500" />
+          <Property Type="Int64" Name="view_num" Nullable="true" />
+          <Property Type="Boolean" Name="arti_top" Nullable="true" />
+          <Property Type="Int32" Name="arti_theme" Nullable="true" />
+          <Property Type="Int32" Name="board_id" Nullable="false" />
+          <Property Type="Int32" Name="user_id" Nullable="false" />
+          <Property Type="String" Name="numNo" Nullable="false" MaxLength="50" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -281,13 +306,16 @@
                 <ScalarProperty Name="arti_theme" ColumnName="arti_theme" />
                 <ScalarProperty Name="board_id" ColumnName="board_id" />
                 <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="numNo" ColumnName="numNo" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="board_Tb">
             <EntityTypeMapping TypeName="ForumWebsiteDBModel.board_Tb">
               <MappingFragment StoreEntitySet="board_Tb">
-                <ScalarProperty Name="board_ID" ColumnName="board_ID" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="theme_board_id" ColumnName="theme_board_id" />
+                <ScalarProperty Name="theme_name" ColumnName="theme_name" />
                 <ScalarProperty Name="board_name" ColumnName="board_name" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -306,6 +334,23 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="UpdateArticle" FunctionName="ForumWebsiteDBModel.Store.UpdateArticle">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ForumWebsiteDBModel.UpdateArticle_Result">
+                <ScalarProperty Name="arti_id" ColumnName="arti_id" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="arti_date" ColumnName="arti_date" />
+                <ScalarProperty Name="arti_update" ColumnName="arti_update" />
+                <ScalarProperty Name="arti_txt" ColumnName="arti_txt" />
+                <ScalarProperty Name="view_num" ColumnName="view_num" />
+                <ScalarProperty Name="arti_top" ColumnName="arti_top" />
+                <ScalarProperty Name="arti_theme" ColumnName="arti_theme" />
+                <ScalarProperty Name="board_id" ColumnName="board_id" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="numNo" ColumnName="numNo" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

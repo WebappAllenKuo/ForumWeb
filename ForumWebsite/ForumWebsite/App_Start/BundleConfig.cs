@@ -13,7 +13,8 @@ namespace ForumWebsite
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Scripts/js/jquery.min.js",
-                        "~/Scripts/js/all.js"));
+                        "~/Scripts/js/all.js",
+                        "~/Scripts/js/functions.js"));
 
 
             // Use the development version of Modernizr to develop with and learn from. Then, when you're

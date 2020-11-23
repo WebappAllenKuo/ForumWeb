@@ -1,0 +1,100 @@
+﻿@model ForumWebsite.Models.HomeViewModel
+@{
+    ViewBag.Title = "ReviewArticle";
+}
+
+<div class="indica article_in">
+    <div class="container">
+        <div class="col-md-9 posta">
+            @*文章內容*@
+            <div class="article_storey">
+                <div class="author_box col-md-3">
+                    <div class="head_img"><img src="images/author/img_h.jpeg?var=2020" title="talkabc123的大頭照" /></div>
+                    <span class="auth_num">樓主</span>
+                    <a class="author" href="">@(Model.userItem.username)</a>
+                    <span>暱稱<font>Java專題</font></span>
+                    <span>性別<font>@(Model.userItem.gender)</font></span>
+                    <span>生日<font>@(((DateTime)Model.userItem.birthday).ToString("yyyy年MM月dd日"))</font></span>
+                </div>
+                <div class="article_box col-md-9">
+                    <div class="info_box">
+
+                        <strong>@(Model.articleItem.title)</strong>
+                        <div>
+                            <span class="art_s"><a class="sort" href="">@(Model.boardItem.board_name)</a></span>
+                            <span class="art_num">
+                                <font>@(Model.articleItem.arti_date)</font>
+                                <font><i class="far fa-comment"></i> @(Model.replyCount)</font>
+                                <font>瀏覽人數 @(Model.articleItem.view_num)</font>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="article_txt">
+                        @(Model.articleItem.arti_txt)
+                    </div>
+                    <div class="other_fun">
+                        @if (Model.userItem.account == (string)Session["account"])
+                        {
+                            <span class="edit_but" title="修改文章">
+                                <i class="fas fa-pen"></i> 編輯
+                                <span class="edit_sele">
+                                    <a href="">修改</a><a href="">刪除</a>
+                                </span>
+                            </span>
+                        }
+                        else
+                        {
+                            <a title="跳轉至進階發文" href="/Article/ReplyArticle?article=@(Model.articleItem.arti_id)&board=@(Model.articleItem.board_id)&theme=@(Model.articleItem.arti_theme)"><i class="fas fa-comment-alt"></i> 回覆</a>
+                        }
+                    </div>
+                    </div>
+                <div class="clearfix"> </div>
+            </div>
+            @*用戶回覆*@
+            @for (int i = 0; i < Model.replyAritlceList.Count(); i++)
+            {
+                <div class="article_storey">
+                    <div class="author_box col-md-3">
+                        <div class="head_img"><img src="images/author/img_h.jpeg" title="talkabc123的大頭照" /></div>
+                        <span class="auth_num">@(Model.replyAritlceList[i].replyOrder)樓</span>
+                        <a class="author" href="">@(Model.userInfoList[i].username)</a>
+                        <span>性別<font>@(Model.userInfoList[i].gender)</font></span>
+                        <span>生日<font>@(((DateTime)Model.userInfoList[i].birthday).ToString("yyyy年MM月dd日"))</font></span>
+                    </div>
+                    <div class="article_box col-md-9">
+                        <div class="info_box">
+                            <div>
+                                <span class="art_num">
+                                    <font>回覆日期：@((Model.replyAritlceList[i].reply_date).ToString("yyyy年MM月dd日"))</font>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="article_txt">
+                            @Model.replyAritlceList[i].reply_txt
+                        </div>
+                        <div class="other_fun">
+                            @if (Model.userInfoList[i].account == (string)Session["account"])
+                            {
+                                <span class="edit_but" title="修改回覆">
+                                    <i class="fas fa-pen"></i> 編輯
+                                    <span class="edit_sele">
+                                        <a href="/Article/EditReply?replyId=@Model.replyAritlceList[i].reply_id&board=@Model.articleItem.board_id&theme=@Model.articleItem.arti_theme&account=@Model.userInfoList[i].account">修改</a><a href="">刪除</a>
+                                    </span>
+                                </span>
+                            }
+                            else
+                            {
+                                <a title="跳轉至進階發文" href="/Article/ReplyArticle?reply=@(Model.replyAritlceList[i].reply_id)&article=@(Model.articleItem.arti_id)&board=@(Model.articleItem.board_id)&theme=@(Model.articleItem.arti_theme)"><i class="fas fa-comment-alt"></i> 回覆</a>
+                            }
+                        </div>
+
+                        </div>
+                    <div class="clearfix"> </div>
+                </div>
+            }
+        </div>
+        @{ Html.RenderAction("_RightArticleReply", "Home"); }
+        <div class="clearfix"> </div>
+    </div>
+</div>
+

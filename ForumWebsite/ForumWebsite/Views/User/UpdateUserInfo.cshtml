@@ -32,9 +32,7 @@
                     @Html.HiddenFor(m => m.account)
                 </div>
                 <div class="control-group">
-                    @Html.LabelFor(m => m.password, new { @class = "control-label" })
-                    @Html.TextBoxFor(m => m.password, new { type = "password", @class = "control", placeholder = "請設定6-15位英數字混合密碼，英文需區分大小寫" })
-                    @Html.ValidationMessageFor(m => m.password)
+                    密碼   ******
                 </div>
                 <div class="control-group">
                     @Html.LabelFor(m => m.username, new { @class = "control-label" })
@@ -73,47 +71,7 @@
                 </script>
             }
         </div>
-        <div class="col-md-3  redes">
-            <h3>
-                最新 <strong>文章回覆</strong>
-                <label3></label3>
-            </h3>
-            <div class="dicado-top">
-                <h5>30 app para download</h5>
-            </div>
-            <div class="dicado-bottom">
-                <div class="dicado-1">
-                    <h6><a href="#">Xbox Series X 主機將如期在年底上市 但部分遊戲可能延期</a></h6>
-                    <span class="itac">
-                        最新回覆 : Paulo Ricardo<br /><i class="far fa-clock"></i> 3 天前<i class="dot_"></i><i class="far fa-comment"></i> 32
-                    </span>
-                </div>
-                <div class="dicado-1">
-                    <h6><a href="#">Xbox Series X 主機將如期在年底上市 但部分遊戲可能延期</a></h6>
-                    <span class="itac">
-                        最新回覆 : Paulo Ricardo<br /><i class="far fa-clock"></i> 3 天前<i class="dot_"></i><i class="far fa-comment"></i> 32
-                    </span>
-                </div>
-                <div class="dicado-1">
-                    <h6><a href="#">Xbox Series X 主機將如期在年底上市 但部分遊戲可能延期</a></h6>
-                    <span class="itac">
-                        最新回覆 : Paulo Ricardo<br /><i class="far fa-clock"></i> 3 天前<i class="dot_"></i><i class="far fa-comment"></i> 32
-                    </span>
-                </div>
-                <div class="dicado-1">
-                    <h6><a href="#">Xbox Series X 主機將如期在年底上市 但部分遊戲可能延期</a></h6>
-                    <span class="itac">
-                        最新回覆 : Paulo Ricardo<br /><i class="far fa-clock"></i> 3 天前<i class="dot_"></i><i class="far fa-comment"></i> 32
-                    </span>
-                </div>
-                <div class="dicado-1">
-                    <h6><a href="#">Xbox Series X 主機將如期在年底上市 但部分遊戲可能延期</a></h6>
-                    <span class="itac">
-                        最新回覆 : Paulo Ricardo<br /><i class="far fa-clock"></i> 3 天前<i class="dot_"></i><i class="far fa-comment"></i> 32
-                    </span>
-                </div>
-            </div>
-        </div>
+        @{ Html.RenderAction("_RightArticleReply", "Home"); }
         <div class="clearfix"> </div>
     </div>
 </div>

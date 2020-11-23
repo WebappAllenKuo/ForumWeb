@@ -29,7 +29,7 @@
                                 if(x>0){
                                     document.getElementById("time_second").innerHTML=x; //每次設定的x的值都不一樣了。
                                 }else{
-                                    location.href="@(runUrl)";
+                                    window.location.href="@Html.Raw(runUrl)";
                                 }
                             }
                 </script>

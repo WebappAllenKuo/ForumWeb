@@ -20,7 +20,9 @@ namespace ForumWebsite.Models
             this.article_Tb = new HashSet<article_Tb>();
         }
     
-        public int board_ID { get; set; }
+        public int id { get; set; }
+        public Nullable<int> theme_board_id { get; set; }
+        public string theme_name { get; set; }
         public string board_name { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

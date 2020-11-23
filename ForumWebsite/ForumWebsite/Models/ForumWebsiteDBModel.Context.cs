@@ -12,6 +12,8 @@ namespace ForumWebsite.Models
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class ForumWebsiteDBEntities : DbContext
     {
@@ -29,5 +31,14 @@ namespace ForumWebsite.Models
         public virtual DbSet<article_Tb> article_Tb { get; set; }
         public virtual DbSet<board_Tb> board_Tb { get; set; }
         public virtual DbSet<user_Tb> user_Tb { get; set; }
+    
+        public virtual ObjectResult<UpdateArticle_Result> UpdateArticle(Nullable<int> article_id)
+        {
+            var article_idParameter = article_id.HasValue ?
+                new ObjectParameter("article_id", article_id) :
+                new ObjectParameter("article_id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UpdateArticle_Result>("UpdateArticle", article_idParameter);
+        }
     }
 }

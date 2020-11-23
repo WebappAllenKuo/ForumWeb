@@ -24,8 +24,8 @@ namespace ForumWebsite.Models
             public string account { get; set; }
             [DisplayName("密碼")]
             [Required(ErrorMessage = "請輸入密碼")]
-            [RegularExpression(".{5,16}", ErrorMessage = "密碼需介於5~16個字元")]
-            [StringLength(16, MinimumLength = 5, ErrorMessage = "密碼需介於5~16個字元")]
+            //[RegularExpression(".{5,16}", ErrorMessage = "密碼需介於5~16個字元")]
+            //[StringLength(16, MinimumLength = 5, ErrorMessage = "密碼需介於5~16個字元")]
             public string password { get; set; }
             [DisplayName("用戶名稱")]
             [Required(ErrorMessage = "請輸入用戶名稱")]

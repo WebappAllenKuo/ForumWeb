@@ -26,13 +26,16 @@
           <ScalarProperty Name="arti_theme" ColumnName="arti_theme" />
           <ScalarProperty Name="board_id" ColumnName="board_id" />
           <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="numNo" ColumnName="numNo" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="board_Tb">
       <EntityTypeMapping TypeName="ForumWebsiteDBModel.board_Tb">
         <MappingFragment StoreEntitySet="board_Tb">
-          <ScalarProperty Name="board_ID" ColumnName="board_ID" />
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="theme_board_id" ColumnName="theme_board_id" />
+          <ScalarProperty Name="theme_name" ColumnName="theme_name" />
           <ScalarProperty Name="board_name" ColumnName="board_name" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -51,5 +54,22 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="UpdateArticle" FunctionName="ForumWebsiteDBModel.Store.UpdateArticle">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ForumWebsiteDBModel.UpdateArticle_Result">
+          <ScalarProperty Name="arti_id" ColumnName="arti_id" />
+          <ScalarProperty Name="title" ColumnName="title" />
+          <ScalarProperty Name="arti_date" ColumnName="arti_date" />
+          <ScalarProperty Name="arti_update" ColumnName="arti_update" />
+          <ScalarProperty Name="arti_txt" ColumnName="arti_txt" />
+          <ScalarProperty Name="view_num" ColumnName="view_num" />
+          <ScalarProperty Name="arti_top" ColumnName="arti_top" />
+          <ScalarProperty Name="arti_theme" ColumnName="arti_theme" />
+          <ScalarProperty Name="board_id" ColumnName="board_id" />
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="numNo" ColumnName="numNo" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
   </EntityContainerMapping>
 </Mapping>

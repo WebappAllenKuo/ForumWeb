@@ -1,0 +1,24 @@
+﻿@model ForumWebsite.Models.HomeViewModel
+
+<div class="col-md-3  redes">
+    <h3>
+        最新 <strong>文章回覆</strong>
+        <label3></label3>
+    </h3>
+    <div class="dicado-top">
+        <h5>30 app para download</h5>
+    </div>
+    <a class="new_artibtn" href="/Article/LaunchArticle@(ViewBag.urlPara)">發表文章</a>
+    <div class="dicado-bottom">
+        @*是否有回覆筆數*@
+        @for (int i = 0; i < Model.replyAritlceList.Count(); i++)
+        {
+            <div class="dicado-1">
+                <h6><a href="/Article/ReviewArticle?article=@(Model.articleList[i].arti_id)&theme=@(Model.boardList[i].id)&board=@(Model.boardList[i].theme_board_id)">@Model.articleList[i].title</a></h6>
+                <span class="itac">
+                    最新回覆 : @Model.userInfoList[i].username<br /><i class="far fa-clock"></i> @Model.replyAritlceList[i].reply_date<i class="dot_"></i><i class="far fa-comment"></i> @Model.replyCountList[i].ToString()
+                </span>
+            </div>
+        }
+    </div>
+</div>
