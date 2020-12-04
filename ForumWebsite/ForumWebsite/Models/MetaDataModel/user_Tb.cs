@@ -34,8 +34,8 @@ namespace ForumWebsite.Models
             [DisplayName("性別")]
             public Nullable<bool> gender { get; set; }
             [DisplayName("E-mail")]
-            [Required(ErrorMessage = "請輸入E-mail")]
-            [EmailAddress(ErrorMessage = "須符合信箱格式")]
+            [Required(ErrorMessage = "請輸入{0}")]
+            [EmailAddress(ErrorMessage = "須符合{0}格式")]
             public string email { get; set; }
             [DisplayName("出生日期")]
             [DataType(DataType.Date, ErrorMessage = "格式須符合\"2020/1/1\"")]

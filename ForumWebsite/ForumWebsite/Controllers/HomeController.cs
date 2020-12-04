@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using ForumWebsite.Models.Service;
 using ForumWebsite.Models;
-using ForumWebsite.Models.Interface.Service;
+using ForumWebsite.Models.Interface.Services;
 using ForumWebsite.Models.Other;
 using System.Collections.Specialized;
 
@@ -14,15 +13,15 @@ namespace ForumWebsite.Controllers
     public class HomeController : Controller
     {   
         private Method_Cs Method = new Method_Cs();
-        protected IService_User Service_User_P { get; private set; }
-        protected IService_Board Service_Board_P { get; private set; }
-        protected IService_Article Service_Article_P { get; private set; }
+        protected IUserService Service_User_P { get; private set; }
+        protected IBoardService Service_Board_P { get; private set; }
+        protected IArticleService Service_Article_P { get; private set; }
         public HomeController() : this(null, null, null) { }
-        public HomeController(IService_User Service_User_Val, IService_Board Service_Board_Val, IService_Article Service_Article_Val)
+        public HomeController(IUserService Service_User_Val, IBoardService Service_Board_Val, IArticleService Service_Article_Val)
         {
-            Service_User_P = Service_User_Val ?? new Service_User();
-            Service_Board_P = Service_Board_Val ?? new Service_Board();
-            Service_Article_P = Service_Article_Val ?? new Service_Article();
+            Service_User_P = Service_User_Val ?? new UserServiceBiz();
+            Service_Board_P = Service_Board_Val ?? new BoardServiceBiz();
+            Service_Article_P = Service_Article_Val ?? new ArticleServiceBiz();
         }
         // GET: Home
         public ActionResult Index()

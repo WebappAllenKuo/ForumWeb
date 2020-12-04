@@ -5,9 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using ForumWebsite.Models;
 using ForumWebsite.Models.Other;
-using ForumWebsite.Models.Interface.Service;
-using ForumWebsite.Models.Repository;
-using ForumWebsite.Models.Service;
+using ForumWebsite.Models.Interface.Services;
 using ForumWebsite.Filters;
 
 namespace ForumWebsite.Controllers
@@ -15,11 +13,11 @@ namespace ForumWebsite.Controllers
     public class UserController : Controller
     {
         private Method_Cs Method = new Method_Cs();
-        protected IService_User Server_User_P { get; private set; }
+        protected IUserService Server_User_P { get; private set; }
         public UserController() : this(null) { }
-        public UserController(IService_User Service_Users_Val)
+        public UserController(IUserService Service_Users_Val)
         {
-            Server_User_P = Service_Users_Val ?? new Service_User();
+            Server_User_P = Service_Users_Val ?? new UserServiceBiz();
         }
         // GET: User
         #region 註冊會員

@@ -9,7 +9,6 @@ namespace ForumWebsite.Models
     [MetadataType(typeof(article_reply_TbMetaData))]
     public partial class article_reply_Tb
     {
-        public string replyOrder { get; set; }
         private class article_reply_TbMetaData
         {
             public string replyOrder { get; set; }

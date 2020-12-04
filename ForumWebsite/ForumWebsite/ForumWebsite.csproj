@@ -161,6 +161,7 @@
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Connection\ConnectionFactory.cs" />
     <Compile Include="Controllers\ArticleController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UserController.cs" />
@@ -193,24 +194,18 @@
       <DependentUpon>ForumWebsiteDBModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\HomeViewModel.cs" />
-    <Compile Include="Models\Interface\Repository\IRepository_Article.cs" />
-    <Compile Include="Models\Interface\Repository\IRepository_Board.cs" />
-    <Compile Include="Models\Interface\Repository\IRepository_Users.cs" />
-    <Compile Include="Models\Interface\Service\IService_Article.cs" />
-    <Compile Include="Models\Interface\Service\IService_User.cs" />
-    <Compile Include="Models\Interface\Service\IService_Board.cs" />
+    <Compile Include="Models\Interface\Repositories\IArticleRepo.cs" />
+    <Compile Include="Models\Interface\Repositories\IBoardRepo.cs" />
+    <Compile Include="Models\Interface\Repositories\IUserRepo.cs" />
+    <Compile Include="Models\Interface\Services\IArticleService.cs" />
+    <Compile Include="Models\Interface\Services\IUserService.cs" />
+    <Compile Include="Models\Interface\Services\IBoardService.cs" />
     <Compile Include="Models\MetaDataModel\article_reply_Tb.cs" />
     <Compile Include="Models\MetaDataModel\user_Tb.cs" />
     <Compile Include="Models\Other\InternalVal.cs" />
     <Compile Include="Models\Other\Method.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Models\Repository\Repository_Article.cs" />
-    <Compile Include="Models\Repository\Repository_Board.cs" />
-    <Compile Include="Models\Repository\Repository_Users.cs" />
-    <Compile Include="Models\Service\Service_Article.cs" />
-    <Compile Include="Models\Service\Service_User.cs" />
-    <Compile Include="Models\Service\Service_Board.cs" />
     <Compile Include="Models\SQLHelper\SqlHelper_Cs.cs" />
     <Compile Include="Models\UpdateArticle_Result.cs">
       <DependentUpon>ForumWebsiteDBModel.tt</DependentUpon>
@@ -253,6 +248,8 @@
     <Content Include="Views\Article\LaunchArticle.cshtml" />
     <Content Include="Views\Article\ReplyArticle.cshtml" />
     <Content Include="Views\Article\EditReply.cshtml" />
+    <Content Include="Views\Article\DeleteReply.cshtml" />
+    <Content Include="Views\Article\EditArticle.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -265,6 +262,9 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

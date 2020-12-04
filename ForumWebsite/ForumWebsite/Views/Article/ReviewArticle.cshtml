@@ -12,7 +12,6 @@
                     <div class="head_img"><img src="images/author/img_h.jpeg?var=2020" title="talkabc123的大頭照" /></div>
                     <span class="auth_num">樓主</span>
                     <a class="author" href="">@(Model.userItem.username)</a>
-                    <span>暱稱<font>Java專題</font></span>
                     <span>性別<font>@(Model.userItem.gender)</font></span>
                     <span>生日<font>@(((DateTime)Model.userItem.birthday).ToString("yyyy年MM月dd日"))</font></span>
                 </div>
@@ -38,7 +37,8 @@
                             <span class="edit_but" title="修改文章">
                                 <i class="fas fa-pen"></i> 編輯
                                 <span class="edit_sele">
-                                    <a href="">修改</a><a href="">刪除</a>
+                                    <a href="@Url.Content("~/Article/EditArticle?article=" + Model.articleItem.arti_id + "&board=" + (Model.articleItem.board_id) + "&theme=" + (Model.articleItem.arti_theme))">修改</a>
+                                    <a href="">刪除</a>
                                 </span>
                             </span>
                         }
@@ -78,7 +78,8 @@
                                 <span class="edit_but" title="修改回覆">
                                     <i class="fas fa-pen"></i> 編輯
                                     <span class="edit_sele">
-                                        <a href="/Article/EditReply?replyId=@Model.replyAritlceList[i].reply_id&board=@Model.articleItem.board_id&theme=@Model.articleItem.arti_theme&account=@Model.userInfoList[i].account">修改</a><a href="">刪除</a>
+                                        <a href="/Article/EditReply?replyId=@Model.replyAritlceList[i].reply_id&board=@Model.articleItem.board_id&theme=@Model.articleItem.arti_theme&account=@Model.userInfoList[i].account">修改</a>
+                                        <a href="@Url.Content("~/Article/DeleteReply?replyId=" + Model.replyAritlceList[i].reply_id + "&article=" + Model.articleItem.arti_id)">刪除</a>
                                     </span>
                                 </span>
                             }

@@ -1,0 +1,4 @@
+C:\Users\user\source\repos\ForumWebsite\Servies.Forum\obj\Debug\netstandard2.0\Services.Forum.csprojAssemblyReference.cache
+C:\Users\user\source\repos\ForumWebsite\Servies.Forum\obj\Debug\netstandard2.0\Services.Forum.AssemblyInfoInputs.cache
+C:\Users\user\source\repos\ForumWebsite\Servies.Forum\obj\Debug\netstandard2.0\Services.Forum.AssemblyInfo.cs
+C:\Users\user\source\repos\ForumWebsite\Servies.Forum\obj\Debug\netstandard2.0\Services.Forum.csproj.CoreCompileInputs.cache

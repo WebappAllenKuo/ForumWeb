@@ -1,0 +1,38 @@
+﻿@model ForumWebsite.Models.HomeViewModel
+@{
+    ViewBag.Title = "DeleteReply";
+}
+
+<div class="indica article_in article_reply article_add">
+    <div class="container">
+        <div class="col-md-9 posta">
+            <div class="article_storey">
+                <div class="article_box col-md-12">
+                    <form id="myform" name="myform" method="post" action="">
+                        @Html.AntiForgeryToken()
+                        <div class="info_box">
+                            <strong>@(Model.articleItem.title)</strong>
+                        </div>
+                        <div class="article_txt">
+                            <div class="board_sele">
+                                <textarea id="article_txt" name="article_txt">@(Model.replyAritlceItem.reply_txt)</textarea>
+
+                            </div>
+                            <div class="other_fun">
+                                @Html.Hidden("replyId", Model.replyAritlceItem.reply_id)
+                                <a class="edit_but_sub" title="修改完成" href="javascript:void(0);"
+                                   onclick="cofirm_mesf(document.myform, '確定修改嗎?')"><i class="fas fa-reply"></i> 我要修改</a>
+                                <a title="取消" href=""><i class="fas fa-backspace"></i> 取消修改</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+        @{ Html.RenderAction("_RightArticleReply", "Home"); }
+        <div class="clearfix"></div>
+    </div>
+</div>
+
+

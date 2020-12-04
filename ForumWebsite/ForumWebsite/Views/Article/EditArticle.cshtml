@@ -1,0 +1,57 @@
+﻿@model ForumWebsite.Models.HomeViewModel
+@{
+    ViewBag.Title = "EditArticle";
+}
+
+<div class="indica article_in article_reply article_add">
+    <div class="container">
+        <div class="col-md-9 posta">
+            <div class="article_storey">
+                <h3>發佈<strong>討論版文章</strong></h3>
+                <div class="article_box col-md-12">
+                    <form id="myform" name="myform" method="post" action="@Url.Content("~/Article/EditArticles")">
+                        @Html.AntiForgeryToken()
+                        <div class="info_box">
+                            <strong><input class="title" name="title" value="@Model.articleItem.title" /></strong>
+                        </div>
+                        <div class="article_txt">
+                            <div class="board_sele">
+                                討論版：
+                                @Model.boardItem.board_name
+                                @Html.Hidden("board_id", Model.boardItem.theme_board_id)
+                                討論版分類：
+                                <select id="theme_id" name="theme_id">
+                                    <option value="0">請選擇</option>
+                                    @foreach (var item in Model.themeList)
+                                    {
+                                        if (item.id == Model.boardItem.id)
+                                        {
+                                            <option value="@item.id" selected>@item.theme_name</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@item.id">@item.theme_name</option>
+                                        }
+                                    }
+                                </select>
+                            </div>
+                            <textarea name="article_txt">@Model.articleItem.arti_txt</textarea>
+
+                        </div>
+                        <div class="other_fun">
+                            @Html.Hidden("boardId", Model.articleItem.arti_id)
+                            <a class="edit_but_sub" title="修改完成" href="javascript:void(0);"
+                               onclick="cofirm_mesf(document.myform, '確定修改文章嗎?')"><i class="fas fa-check"></i> 修改完成</a>
+                            <a title="取消" href="javascript:history.go(-1);"><i class="fas fa-backspace"></i> 取消修改</a>
+                        </div>
+                    </form>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+        @{ Html.RenderAction("_RightArticleReply", "Home"); }
+        <div class="clearfix"></div>
+    </div>
+</div>
+
+
